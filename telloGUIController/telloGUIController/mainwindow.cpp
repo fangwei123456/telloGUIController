@@ -6,9 +6,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+
+void MainWindow::on_connectButton_clicked()
+{
+    if(!controller.isRunning())
+        controller.connectToTello("localhost");
+    else
+        controller.sendControlOrder("!!!");
 }
