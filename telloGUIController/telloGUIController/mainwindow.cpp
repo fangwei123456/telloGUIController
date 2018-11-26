@@ -7,6 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
+
+    connect(ui->openCameraButton,SIGNAL(released()),&vsr,SLOT(openStream()));
+
 }
 
 MainWindow::~MainWindow()
@@ -14,12 +18,3 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
-void MainWindow::on_connectButton_clicked()
-{
-    if(!controller.isRunning())
-        controller.connectToTello("localhost");
-    else
-        controller.sendControlOrder("!!!");
-}

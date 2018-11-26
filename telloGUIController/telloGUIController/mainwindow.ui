@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="connectButton">
+   <widget class="QPushButton" name="connectTelloButton">
     <property name="geometry">
      <rect>
       <x>580</x>
@@ -25,6 +25,19 @@
     </property>
     <property name="text">
      <string>connect</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="openCameraButton">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>90</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>openCamera</string>
     </property>
    </widget>
   </widget>

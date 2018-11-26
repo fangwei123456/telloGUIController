@@ -15,11 +15,20 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    udpcontrollerthread.cpp
+    tellodata.cpp \
+    udpclient.cpp \
+    udpserver.cpp \
+    tellocontroller.cpp \
+    videostreamreader.cpp
 
 HEADERS  += mainwindow.h \
-    udpcontrollerthread.h
+    tellodata.h \
+    udpclient.h \
+    udpserver.h \
+    tellocontroller.h \
+    videostreamreader.h
 
 FORMS    += mainwindow.ui
 
-
+CONFIG += link_pkgconfig
+PKGCONFIG += opencv

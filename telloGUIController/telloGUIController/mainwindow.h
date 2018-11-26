@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <udpcontrollerthread.h>
+#include "tellocontroller.h"
+#include "videostreamreader.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,12 +17,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    udpControllerThread controller;
+    videoStreamReader vsr;
+
+
 
 
 private slots:
 
-    void on_connectButton_clicked();
+
 
 private:
     Ui::MainWindow *ui;
