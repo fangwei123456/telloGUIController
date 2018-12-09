@@ -34,6 +34,8 @@ void videoStreamReader::openStream()
     }
     cv::namedWindow("tello camera");
     hasBeenOpened = true;
+
+
     while(1)
     {
         if(!camera.read(currentFrame))
@@ -41,7 +43,8 @@ void videoStreamReader::openStream()
             printLog(className,"[error]can't open frame from stream");
             break;
         }
+
         imshow("tello camera",currentFrame);
-        cv::waitKey(3);
+        cv::waitKey(33);
     }
 }

@@ -14,7 +14,7 @@ public:
     explicit udpClient(QObject *parent = 0);
     void setIPandPort(const QString ip, const quint16 port);
     bool setUdpServer(const QString ip = "0.0.0.0", const quint16 port = 8890,
-                      const QString fileName = NULL, const bool isStateReaderF = false);
+                      const QString fileName = NULL);
     //if fileName!=NULL, data from udp will save to file
 
     void rename(const QString newName);

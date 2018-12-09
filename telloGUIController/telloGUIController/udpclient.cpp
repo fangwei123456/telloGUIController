@@ -9,8 +9,9 @@ udpClient::udpClient(QObject *parent) : QObject(parent)
     receivedData = new char[receivedDataSize];
     wifiSnrTimer = new QTimer(this);
     justSentWifiSnrOrder = false;
-    updateTelloStateInGuiInverval = 100;
+    updateTelloStateInGuiInverval = 10;
     telloStateGotTimes = 0;
+    isStateReader = false;
 }
 
 void udpClient::setUpdateTelloStateInGuiInverval(const int newInterval)
@@ -30,7 +31,7 @@ void udpClient::setIPandPort(const QString ip, const quint16 port)
              +QString::number(serverPort));
     connect(udpSocket,SIGNAL(readyRead()),this,SLOT(readMesg()));
     connect(wifiSnrTimer,SIGNAL(timeout()),this,SLOT(getTelloWifiSnr()));
-    wifiSnrTimer->start(1000);//send order to get tello wifi snr every 1000ms
+    wifiSnrTimer->start(2000);//send order to get tello wifi snr every 1000ms
 }
 
 void udpClient::sendMesg(const QString mesg)
@@ -52,9 +53,9 @@ void udpClient::rename(const QString newName)
     className = newName;
 }
 
-bool udpClient::setUdpServer(const QString ip, const quint16 port, const QString fileName, const bool isStateReaderF)
+bool udpClient::setUdpServer(const QString ip, const quint16 port, const QString fileName)
 {
-    isStateReader = isStateReaderF;
+    isStateReader = true;
     if(ip=="localhost")
         listenedIP = QHostAddress::LocalHost;
     else
@@ -113,16 +114,22 @@ void udpClient::readMesg()
         }
         else
         {
-            if(strcmp(receivedData,"ok") || strcmp(receivedData,"error"))
+            if(receivedData[0]=='o' && receivedData[1]=='k')
             {
-                emit(newTelloReplyGot(QString(receivedData)));
+                emit(newTelloReplyGot("ok"));
             }
+            else
+                if(receivedData[0]=='e' && receivedData[1]=='r')
+                {
+                    emit(newTelloReplyGot("error"));
+                }
+
 
             if(justSentWifiSnrOrder)
             {
-                qDebug()<<receivedData;
-                tello_WifiSnr = atof(receivedData);
+                sscanf(receivedData,"%d",&tello_wifiSnr);
                 justSentWifiSnrOrder = false;
+                emit(newTelloWifiSnrGot());
             }
         }
 

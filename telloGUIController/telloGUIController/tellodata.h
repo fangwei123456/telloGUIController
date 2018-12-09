@@ -24,7 +24,7 @@ extern int tello_time;
 extern float tello_agx;
 extern float tello_agy;
 extern float tello_agz;
-extern float tello_WifiSnr;
+extern int tello_wifiSnr;
 
 
 //--------------------------------------

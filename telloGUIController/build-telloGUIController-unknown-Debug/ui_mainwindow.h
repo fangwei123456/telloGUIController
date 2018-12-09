@@ -48,12 +48,12 @@ public:
     QLabel *telloVgxLabel;
     QWidget *formLayoutWidget_3;
     QFormLayout *aFormLayout;
-    QProgressBar *telloAgx;
     QLabel *telloAgyLabel;
-    QProgressBar *telloAgy;
     QLabel *telloAgzLabel;
-    QProgressBar *telloAgz;
     QLabel *telloAgxLabel;
+    QSlider *telloAgx;
+    QSlider *telloAgy;
+    QSlider *telloAgz;
     QProgressBar *telloBaro;
     QLabel *telloBaroLabel;
     QProgressBar *telloH;
@@ -61,11 +61,11 @@ public:
     QWidget *formLayoutWidget_4;
     QFormLayout *degreeFormLayout;
     QLabel *telloPitchLabel;
-    QSlider *telloPitch;
     QLabel *telloRollLabel;
     QSlider *telloRoll;
     QLabel *telloYawLabel;
     QSlider *telloYaw;
+    QSlider *telloPitch;
     QLCDNumber *telloPitchV;
     QLCDNumber *telloRollV;
     QLCDNumber *telloYawV;
@@ -77,6 +77,9 @@ public:
     QTextBrowser *keyboardTextBrowser;
     QLabel *orderLabel;
     QLabel *replyLabel;
+    QLCDNumber *telloAgxV;
+    QLCDNumber *telloAgyV;
+    QLCDNumber *telloAgzV;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -179,24 +182,11 @@ public:
         aFormLayout->setContentsMargins(11, 11, 11, 11);
         aFormLayout->setObjectName(QStringLiteral("aFormLayout"));
         aFormLayout->setContentsMargins(0, 0, 0, 0);
-        telloAgx = new QProgressBar(formLayoutWidget_3);
-        telloAgx->setObjectName(QStringLiteral("telloAgx"));
-        telloAgx->setStyleSheet(QStringLiteral(""));
-        telloAgx->setValue(24);
-
-        aFormLayout->setWidget(0, QFormLayout::FieldRole, telloAgx);
-
         telloAgyLabel = new QLabel(formLayoutWidget_3);
         telloAgyLabel->setObjectName(QStringLiteral("telloAgyLabel"));
         telloAgyLabel->setFont(font);
 
         aFormLayout->setWidget(1, QFormLayout::LabelRole, telloAgyLabel);
-
-        telloAgy = new QProgressBar(formLayoutWidget_3);
-        telloAgy->setObjectName(QStringLiteral("telloAgy"));
-        telloAgy->setValue(24);
-
-        aFormLayout->setWidget(1, QFormLayout::FieldRole, telloAgy);
 
         telloAgzLabel = new QLabel(formLayoutWidget_3);
         telloAgzLabel->setObjectName(QStringLiteral("telloAgzLabel"));
@@ -204,23 +194,51 @@ public:
 
         aFormLayout->setWidget(2, QFormLayout::LabelRole, telloAgzLabel);
 
-        telloAgz = new QProgressBar(formLayoutWidget_3);
-        telloAgz->setObjectName(QStringLiteral("telloAgz"));
-        telloAgz->setValue(24);
-
-        aFormLayout->setWidget(2, QFormLayout::FieldRole, telloAgz);
-
         telloAgxLabel = new QLabel(formLayoutWidget_3);
         telloAgxLabel->setObjectName(QStringLiteral("telloAgxLabel"));
         telloAgxLabel->setFont(font);
 
         aFormLayout->setWidget(0, QFormLayout::LabelRole, telloAgxLabel);
 
+        telloAgx = new QSlider(formLayoutWidget_3);
+        telloAgx->setObjectName(QStringLiteral("telloAgx"));
+        telloAgx->setEnabled(false);
+        telloAgx->setMinimum(-1500);
+        telloAgx->setMaximum(1500);
+        telloAgx->setOrientation(Qt::Horizontal);
+        telloAgx->setTickPosition(QSlider::TicksAbove);
+        telloAgx->setTickInterval(200);
+
+        aFormLayout->setWidget(0, QFormLayout::FieldRole, telloAgx);
+
+        telloAgy = new QSlider(formLayoutWidget_3);
+        telloAgy->setObjectName(QStringLiteral("telloAgy"));
+        telloAgy->setEnabled(false);
+        telloAgy->setMinimum(-1500);
+        telloAgy->setMaximum(1500);
+        telloAgy->setOrientation(Qt::Horizontal);
+        telloAgy->setTickPosition(QSlider::TicksAbove);
+        telloAgy->setTickInterval(200);
+
+        aFormLayout->setWidget(1, QFormLayout::FieldRole, telloAgy);
+
+        telloAgz = new QSlider(formLayoutWidget_3);
+        telloAgz->setObjectName(QStringLiteral("telloAgz"));
+        telloAgz->setEnabled(false);
+        telloAgz->setMinimum(-1500);
+        telloAgz->setMaximum(1500);
+        telloAgz->setOrientation(Qt::Horizontal);
+        telloAgz->setTickPosition(QSlider::TicksAbove);
+        telloAgz->setTickInterval(200);
+
+        aFormLayout->setWidget(2, QFormLayout::FieldRole, telloAgz);
+
         telloBaro = new QProgressBar(centralWidget);
         telloBaro->setObjectName(QStringLiteral("telloBaro"));
         telloBaro->setGeometry(QRect(480, 50, 191, 21));
-        telloBaro->setMaximum(3000);
-        telloBaro->setValue(100);
+        telloBaro->setMinimum(-100);
+        telloBaro->setMaximum(0);
+        telloBaro->setValue(-50);
         telloBaro->setOrientation(Qt::Horizontal);
         telloBaroLabel = new QLabel(centralWidget);
         telloBaroLabel->setObjectName(QStringLiteral("telloBaroLabel"));
@@ -240,7 +258,7 @@ public:
         telloTofLabel->setFont(font1);
         formLayoutWidget_4 = new QWidget(centralWidget);
         formLayoutWidget_4->setObjectName(QStringLiteral("formLayoutWidget_4"));
-        formLayoutWidget_4->setGeometry(QRect(20, 280, 301, 139));
+        formLayoutWidget_4->setGeometry(QRect(20, 280, 301, 149));
         degreeFormLayout = new QFormLayout(formLayoutWidget_4);
         degreeFormLayout->setSpacing(6);
         degreeFormLayout->setContentsMargins(11, 11, 11, 11);
@@ -252,15 +270,6 @@ public:
 
         degreeFormLayout->setWidget(0, QFormLayout::LabelRole, telloPitchLabel);
 
-        telloPitch = new QSlider(formLayoutWidget_4);
-        telloPitch->setObjectName(QStringLiteral("telloPitch"));
-        telloPitch->setMinimum(-90);
-        telloPitch->setMaximum(90);
-        telloPitch->setOrientation(Qt::Horizontal);
-        telloPitch->setTickPosition(QSlider::TicksAbove);
-
-        degreeFormLayout->setWidget(0, QFormLayout::FieldRole, telloPitch);
-
         telloRollLabel = new QLabel(formLayoutWidget_4);
         telloRollLabel->setObjectName(QStringLiteral("telloRollLabel"));
         telloRollLabel->setFont(font);
@@ -269,10 +278,12 @@ public:
 
         telloRoll = new QSlider(formLayoutWidget_4);
         telloRoll->setObjectName(QStringLiteral("telloRoll"));
+        telloRoll->setEnabled(false);
         telloRoll->setMinimum(-180);
         telloRoll->setMaximum(180);
         telloRoll->setOrientation(Qt::Horizontal);
         telloRoll->setTickPosition(QSlider::TicksAbove);
+        telloRoll->setTickInterval(10);
 
         degreeFormLayout->setWidget(1, QFormLayout::FieldRole, telloRoll);
 
@@ -284,12 +295,24 @@ public:
 
         telloYaw = new QSlider(formLayoutWidget_4);
         telloYaw->setObjectName(QStringLiteral("telloYaw"));
+        telloYaw->setEnabled(false);
         telloYaw->setMinimum(-180);
         telloYaw->setMaximum(180);
         telloYaw->setOrientation(Qt::Horizontal);
         telloYaw->setTickPosition(QSlider::TicksAbove);
 
         degreeFormLayout->setWidget(2, QFormLayout::FieldRole, telloYaw);
+
+        telloPitch = new QSlider(formLayoutWidget_4);
+        telloPitch->setObjectName(QStringLiteral("telloPitch"));
+        telloPitch->setEnabled(false);
+        telloPitch->setMinimum(-90);
+        telloPitch->setMaximum(90);
+        telloPitch->setOrientation(Qt::Horizontal);
+        telloPitch->setTickPosition(QSlider::TicksAbove);
+        telloPitch->setTickInterval(5);
+
+        degreeFormLayout->setWidget(0, QFormLayout::FieldRole, telloPitch);
 
         telloPitchV = new QLCDNumber(centralWidget);
         telloPitchV->setObjectName(QStringLiteral("telloPitchV"));
@@ -319,7 +342,7 @@ public:
         telloTof->setOrientation(Qt::Horizontal);
         replyTextBrowser = new QTextBrowser(centralWidget);
         replyTextBrowser->setObjectName(QStringLiteral("replyTextBrowser"));
-        replyTextBrowser->setGeometry(QRect(660, 300, 61, 411));
+        replyTextBrowser->setGeometry(QRect(660, 300, 121, 411));
         keyboardImgLabel = new QLabel(centralWidget);
         keyboardImgLabel->setObjectName(QStringLiteral("keyboardImgLabel"));
         keyboardImgLabel->setGeometry(QRect(10, 520, 431, 181));
@@ -335,6 +358,18 @@ public:
         replyLabel->setObjectName(QStringLiteral("replyLabel"));
         replyLabel->setGeometry(QRect(660, 270, 61, 27));
         replyLabel->setFont(font);
+        telloAgxV = new QLCDNumber(centralWidget);
+        telloAgxV->setObjectName(QStringLiteral("telloAgxV"));
+        telloAgxV->setGeometry(QRect(630, 130, 101, 41));
+        telloAgxV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
+        telloAgyV = new QLCDNumber(centralWidget);
+        telloAgyV->setObjectName(QStringLiteral("telloAgyV"));
+        telloAgyV->setGeometry(QRect(630, 170, 101, 41));
+        telloAgyV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
+        telloAgzV = new QLCDNumber(centralWidget);
+        telloAgzV->setObjectName(QStringLiteral("telloAgzV"));
+        telloAgzV->setGeometry(QRect(630, 210, 101, 41));
+        telloAgzV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -355,11 +390,8 @@ public:
         telloVgzLabel->setText(QApplication::translate("MainWindow", "Vgz", 0));
         telloVgz->setFormat(QApplication::translate("MainWindow", "%v", 0));
         telloVgxLabel->setText(QApplication::translate("MainWindow", "Vgx", 0));
-        telloAgx->setFormat(QApplication::translate("MainWindow", "%v", 0));
         telloAgyLabel->setText(QApplication::translate("MainWindow", "Agy", 0));
-        telloAgy->setFormat(QApplication::translate("MainWindow", "%v", 0));
         telloAgzLabel->setText(QApplication::translate("MainWindow", "Agz", 0));
-        telloAgz->setFormat(QApplication::translate("MainWindow", "%v", 0));
         telloAgxLabel->setText(QApplication::translate("MainWindow", "Agx", 0));
         telloBaro->setFormat(QApplication::translate("MainWindow", "%v", 0));
         telloBaroLabel->setText(QApplication::translate("MainWindow", "Height(Baro)", 0));

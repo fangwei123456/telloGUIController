@@ -12,14 +12,14 @@ telloController::telloController(QObject *parent) : QObject(parent)
 
 
     stateReader.rename("stateRader");
-    stateReader.setUdpServer("0.0.0.0",8890,"log.txt",true);
+    stateReader.setUdpServer("0.0.0.0",8890,"log.txt");
     stateReader.moveToThread(&readerThread);
     readerThread.start();
 
     this->moveToThread(&controllerThread);
     controllerThread.start();
 
-    //connect(&stateReader,SIGNAL(newMesgGot(const char*,qint64)),this,SLOT(updateTelloState(const char*,qint64)));
+
 }
 
 

@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->openCameraButton,SIGNAL(released()),&mVideoStreamReader,SLOT(openStream()));
     connect(&mTelloController.stateReader,SIGNAL(newTelloStateGot()),this,SLOT(updateTelloStateInGui()));
-    connect(&mTelloController.stateReader,SIGNAL(newTelloWifiSnrGot()),this,SLOT(updateTelloWifiSnrInGui()));
+    connect(&mTelloController.orderSender,SIGNAL(newTelloWifiSnrGot()),this,SLOT(updateTelloWifiSnrInGui()));
     connect(&mTelloController.orderSender,SIGNAL(newTelloReplyGot(QString)),this,SLOT(updateReceivedReply(QString)));
 
     orderCounter = 0;
@@ -48,6 +48,9 @@ void MainWindow::updateTelloStateInGui()
     ui->telloAgx->setValue(tello_agx);
     ui->telloAgy->setValue(tello_agy);
     ui->telloAgz->setValue(tello_agz);
+    ui->telloAgxV->display(tello_agx);
+    ui->telloAgyV->display(tello_agy);
+    ui->telloAgzV->display(tello_agz);
 
     ui->telloBat->setValue(tello_bat);
 
@@ -62,7 +65,7 @@ void MainWindow::updateTelloStateInGui()
 
 void MainWindow::updateTelloWifiSnrInGui()
 {
-    ui->telloWIFI->setValue(tello_WifiSnr);
+    ui->telloWIFI->setValue(tello_wifiSnr);
 }
 
 void MainWindow::on_connectTelloButton_released()
@@ -100,7 +103,9 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
 
 void MainWindow::keyReleaseEvent(QKeyEvent *ev)
 {
-    pressedKey.remove(pressedKey.indexOf(ev->key()));
+    int keyPos = pressedKey.indexOf(ev->key());
+    if(keyPos>=0)
+    pressedKey.remove(keyPos);
 }
 
 void MainWindow::sendKeyOrder()
