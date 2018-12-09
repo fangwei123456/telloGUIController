@@ -3,8 +3,8 @@
 videoStreamReader::videoStreamReader(QObject *parent) : QObject(parent)
 {
     className = "[videoStreamReader]";
-    //videoURL = "udp://0.0.0.0:11111";
-    videoURL = "udp://192.168.113.58:6666";
+    videoURL = "udp://0.0.0.0:11111";
+    //videoURL = "udp://192.168.113.58:6666";
     //videoURL = "/home/nvidia/视频/264sample.mp4";
     hasBeenOpened = false;
     this->moveToThread(&videoStreamReaderThread);

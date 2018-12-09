@@ -19,7 +19,7 @@ private:
     QString videoURL;
     QThread videoStreamReaderThread;
     QString className;
-    bool opened;
+    bool hasBeenOpened;
 signals:
 
 public slots:

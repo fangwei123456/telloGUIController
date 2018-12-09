@@ -5,32 +5,31 @@
 #include <QThread>
 
 #include "udpclient.h"
-#include "udpserver.h"
+
 
 class telloController : public QObject
 {
     Q_OBJECT
 public:
     explicit telloController(QObject *parent = 0);
-
+    udpClient orderSender;
+    udpClient stateReader;
 
 private:
-    udpClient orderSender;
+    QThread controllerThread;
+
     QThread senderThread;
-
-
-
-    udpServer responseReader;
     QThread readerThread;
 
 
 
 signals:
-    void sendOrder(const QString order);
-    void telloResponse(const bool resp);
 
+    void telloResponse(const bool resp);
+    void sendOrder(const QString order);
 
 public slots:
+
 
 
 };

@@ -5,23 +5,23 @@ telloController::telloController(QObject *parent) : QObject(parent)
 {
 
     orderSender.rename("orderSender");
-    //orderSender.setIPandPort("192.168.10.1",8889);
-    orderSender.setIPandPort("localhost",8889);
+    orderSender.setIPandPort("192.168.10.1",8889);
     orderSender.moveToThread(&senderThread);
-    readerThread.start();
-    printLog("[readerThread]","thread is running");
-
-    responseReader.rename("responseReader");
-    //responseReader.setUdpServer("192.168.10.1",8889);
-    responseReader.setUdpServer("localhost",8889);
-    responseReader.moveToThread(&readerThread);
     senderThread.start();
-    printLog("[senderThread]","thread is running");
-
-
     connect(this,SIGNAL(sendOrder(QString)),&orderSender,SLOT(sendMesg(QString)));
 
+
+    stateReader.rename("stateRader");
+    stateReader.setUdpServer("0.0.0.0",8890,"log.txt",true);
+    stateReader.moveToThread(&readerThread);
+    readerThread.start();
+
+    this->moveToThread(&controllerThread);
+    controllerThread.start();
+
+    //connect(&stateReader,SIGNAL(newMesgGot(const char*,qint64)),this,SLOT(updateTelloState(const char*,qint64)));
 }
+
 
 
 

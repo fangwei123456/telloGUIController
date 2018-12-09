@@ -30,15 +30,15 @@ struct qt_meta_stringdata_telloController_t {
 static const qt_meta_stringdata_telloController_t qt_meta_stringdata_telloController = {
     {
 QT_MOC_LITERAL(0, 0, 15), // "telloController"
-QT_MOC_LITERAL(1, 16, 9), // "sendOrder"
-QT_MOC_LITERAL(2, 26, 0), // ""
-QT_MOC_LITERAL(3, 27, 5), // "order"
-QT_MOC_LITERAL(4, 33, 13), // "telloResponse"
-QT_MOC_LITERAL(5, 47, 4) // "resp"
+QT_MOC_LITERAL(1, 16, 13), // "telloResponse"
+QT_MOC_LITERAL(2, 30, 0), // ""
+QT_MOC_LITERAL(3, 31, 4), // "resp"
+QT_MOC_LITERAL(4, 36, 9), // "sendOrder"
+QT_MOC_LITERAL(5, 46, 5) // "order"
 
     },
-    "telloController\0sendOrder\0\0order\0"
-    "telloResponse\0resp"
+    "telloController\0telloResponse\0\0resp\0"
+    "sendOrder\0order"
 };
 #undef QT_MOC_LITERAL
 
@@ -60,8 +60,8 @@ static const uint qt_meta_data_telloController[] = {
        4,    1,   27,    2, 0x06 /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::QString,    3,
-    QMetaType::Void, QMetaType::Bool,    5,
+    QMetaType::Void, QMetaType::Bool,    3,
+    QMetaType::Void, QMetaType::QString,    5,
 
        0        // eod
 };
@@ -72,22 +72,22 @@ void telloController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         telloController *_t = static_cast<telloController *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->sendOrder((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 1: _t->telloResponse((*reinterpret_cast< const bool(*)>(_a[1]))); break;
+        case 0: _t->telloResponse((*reinterpret_cast< const bool(*)>(_a[1]))); break;
+        case 1: _t->sendOrder((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
         {
-            typedef void (telloController::*_t)(const QString );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&telloController::sendOrder)) {
+            typedef void (telloController::*_t)(const bool );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&telloController::telloResponse)) {
                 *result = 0;
             }
         }
         {
-            typedef void (telloController::*_t)(const bool );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&telloController::telloResponse)) {
+            typedef void (telloController::*_t)(const QString );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&telloController::sendOrder)) {
                 *result = 1;
             }
         }
@@ -131,14 +131,14 @@ int telloController::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void telloController::sendOrder(const QString _t1)
+void telloController::telloResponse(const bool _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void telloController::telloResponse(const bool _t1)
+void telloController::sendOrder(const QString _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

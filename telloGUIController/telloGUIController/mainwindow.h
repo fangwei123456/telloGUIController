@@ -17,7 +17,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    videoStreamReader vsr;
+    telloController mTelloController;
+    videoStreamReader mVideoStreamReader;
 
 
 
@@ -25,6 +26,8 @@ public:
 private slots:
 
 
+
+    void on_connectTelloButton_released();
 
 private:
     Ui::MainWindow *ui;

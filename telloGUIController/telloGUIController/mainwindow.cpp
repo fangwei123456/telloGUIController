@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "tellodata.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -9,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    connect(ui->openCameraButton,SIGNAL(released()),&vsr,SLOT(openStream()));
+    connect(ui->openCameraButton,SIGNAL(released()),&mVideoStreamReader,SLOT(openStream()));
 
 }
 
@@ -18,3 +19,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_connectTelloButton_released()
+{
+    emit(mTelloController.sendOrder("command"));
+    emit(mTelloController.sendOrder("streamon"));
+
+}
