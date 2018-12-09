@@ -28,6 +28,7 @@ float tello_agx;
 float tello_agy;
 float tello_agz;
 
+float tello_WifiSnr;
 
 
 

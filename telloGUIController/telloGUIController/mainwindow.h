@@ -23,12 +23,15 @@ public:
 
 
 
+
+
 private slots:
 
 
 
     void on_connectTelloButton_released();
-
+    void updateTelloStateInGui();
+    void updateTelloWifiSnrInGui();
 private:
     Ui::MainWindow *ui;
 };
