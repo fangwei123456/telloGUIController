@@ -4,9 +4,10 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 
+
 //sharedData----------------------------
 extern cv::Mat currentFrame;
-
+extern QString min_control_division_value;
 extern int tello_pitch;
 extern int tello_roll;
 extern int tello_yaw;

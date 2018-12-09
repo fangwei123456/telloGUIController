@@ -30,3 +30,6 @@ FORMS    += mainwindow.ui
 
 CONFIG += link_pkgconfig
 PKGCONFIG += opencv
+
+RESOURCES += \
+    resourcefile.qrc

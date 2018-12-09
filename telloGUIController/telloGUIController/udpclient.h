@@ -40,6 +40,7 @@ signals:
     void newMesgGot(const char *newMesg, const qint64 mesgSize);
     void newTelloStateGot();
     void newTelloWifiSnrGot();
+    void newTelloReplyGot(const QString newReply);
 
 public slots:
     void sendMesg(const QString mesg);
