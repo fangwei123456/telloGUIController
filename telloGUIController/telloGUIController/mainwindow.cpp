@@ -20,7 +20,17 @@ MainWindow::MainWindow(QWidget *parent) :
     orderCounter = 0;
     replyCounter = 0;
     connect(&keyOrderSendTimer,SIGNAL(timeout()),this,SLOT(sendKeyOrder()));
-    keyOrderSendTimer.start(100);
+    keyOrderSendTimer.start(MIN_SEND_ORDER_INTERVAL);
+    for(int i=0; i<8; i++)
+    {
+        keyPressed[i] = false;
+        keyPressed2[i] = false;
+    }
+
+    moveDistance = MIN_MOVE_DISTANCE;
+    rotateDegree = MIN_ROTATE_DEGREE;
+    moveDistanceStr = QString::number(moveDistance);
+    rotateDegreeStr = QString::number(rotateDegree);
 
 }
 
@@ -96,106 +106,225 @@ void MainWindow::on_openCameraButton_released()
 
 void MainWindow::keyPressEvent(QKeyEvent *ev)
 {
-    if(pressedKey.indexOf(ev->key())==-1)
-        pressedKey.append(ev->key());
+    int keyID = -1;
+    switch (ev->key())
+    {
+        case Qt::Key_F1:
+            updateSentOrder("command");
+            emit(mTelloController.sendOrder("command"));
+            break;
+        case Qt::Key_F2:
+            updateSentOrder("emergency");
+            emit(mTelloController.sendOrder("emergency"));
+            break;
+        case Qt::Key_F3:
+            updateSentOrder("streamon");
+            emit(mTelloController.sendOrder("streamon"));
+            break;
+        case Qt::Key_F4:
+            updateSentOrder("streamoff");
+            emit(mTelloController.sendOrder("streamoff"));
+            break;
+        case Qt::Key_F5:
+            updateSentOrder("takeoff");
+            emit(mTelloController.sendOrder("takeoff"));
+            break;
+        case Qt::Key_F6:
+            updateSentOrder("land");
+            emit(mTelloController.sendOrder("land"));
+            break;
+        case Qt::Key_W:
+            keyID = 0;
+            break;
+        case Qt::Key_A:
+            keyID = 1;
+            break;
+        case Qt::Key_S:
+            keyID = 2;
+            break;
+        case Qt::Key_D:
+            keyID = 3;
+            break;
+        case Qt::Key_Up:
+            keyID = 4;
+            break;
+        case Qt::Key_Down:
+            keyID = 5;
+            break;
+        case Qt::Key_Q:
+            keyID = 6;
+            break;
+        case Qt::Key_E:
+            keyID = 7;
+            break;
+        case Qt::Key_1:
+            if(moveDistance>MIN_MOVE_DISTANCE)
+            {
+                moveDistance--;
+                moveDistanceStr = QString::number(moveDistance);
+                updateSensitivityInGui();
+            }
+            break;
+        case Qt::Key_2:
+            if(moveDistance<MAX_MOVE_DISTANCE)
+            {
+                moveDistance++;
+                moveDistanceStr = QString::number(moveDistance);
+                updateSensitivityInGui();
+            }
+            break;
+        case Qt::Key_3:
+            if(rotateDegree>MIN_ROTATE_DEGREE)
+            {
+                rotateDegree--;
+                rotateDegreeStr = QString::number(rotateDegree);
+                updateSensitivityInGui();
+            }
+            break;
+        case Qt::Key_4:
+        if(rotateDegree<MAX_ROTATE_DEGREE)
+        {
+            rotateDegree++;
+            rotateDegreeStr = QString::number(rotateDegree);
+            updateSensitivityInGui();
+        }
+            break;
+        default:
+        break;
+    }
+
+    if(keyID!=-1)
+    {
+        keyPressed[keyID] = true;
+        keyPressed2[keyID] = true;
+
+    }
 
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *ev)
 {
-    int keyPos = pressedKey.indexOf(ev->key());
-    if(keyPos>=0)
-    pressedKey.remove(keyPos);
+    int keyID = -1;
+    switch (ev->key())
+    {
+        case Qt::Key_W:
+            keyID = 0;
+            break;
+        case Qt::Key_A:
+            keyID = 1;
+            break;
+        case Qt::Key_S:
+            keyID = 2;
+            break;
+        case Qt::Key_D:
+            keyID = 3;
+            break;
+        case Qt::Key_Up:
+            keyID = 4;
+            break;
+        case Qt::Key_Down:
+            keyID = 5;
+            break;
+        case Qt::Key_Q:
+            keyID = 6;
+            break;
+        case Qt::Key_E:
+            keyID = 7;
+            break;
+        default:
+        break;
+    }
+
+    if(keyID!=-1)
+    {
+        keyPressed[keyID] = false;
+        checkKeyList.enqueue(keyID);
+        QTimer::singleShot(20,this,SLOT(checkKeyReallyReleased()));
+    }
 }
 
 void MainWindow::sendKeyOrder()
 {
-    if(!pressedKey.isEmpty())
+     /*
+      * key  function
+      * same as fly a plane in GTA
+      * F1   connect to tello and start command mode
+      * F2   stop tello's engine, EMERGENCY
+      * F3   open video stream
+      * F4   off video stream
+      * F5   takeoff
+      * F6   land
+      * W    up
+      * S    down
+      * A    left
+      * D    right
+      * ↑    forward
+      * ↓    back
+      * Q    ccw, ↺
+      * E    cw, ↻
+      *
+      * */
+    QString newOrder;
+    for(int i=0; i<8; i++)
     {
-        for(pressedKeyIter = pressedKey.begin(); pressedKeyIter!=pressedKey.end(); pressedKeyIter++)\
+        if(keyPressed2[i])
         {
-            /*
-             * key  function
-             * same as fly a plane in GTA
-             * F1   connect to tello and start command mode
-             * F2   stop tello's engine, EMERGENCY
-             * F3   open video stream
-             * F4   off video stream
-             * F5   takeoff
-             * F6   land
-             * W    up
-             * S    down
-             * A    left
-             * D    right
-             * ↑    forward
-             * ↓    back
-             * Q    ccw, ↺
-             * E    cw, ↻
-             *
-             * */
-            switch (*pressedKeyIter) {
-            case Qt::Key_F1:
-                updateSentOrder("command");
-                emit(mTelloController.sendOrder("command"));
-                break;
-            case Qt::Key_F2:
-                updateSentOrder("emergency");
-                emit(mTelloController.sendOrder("emergency"));
-                break;
-            case Qt::Key_F3:
-                updateSentOrder("streamon");
-                emit(mTelloController.sendOrder("streamon"));
-                break;
-            case Qt::Key_F4:
-                updateSentOrder("streamoff");
-                emit(mTelloController.sendOrder("streamoff"));
-                break;
-            case Qt::Key_F5:
-                updateSentOrder("takeoff");
-                emit(mTelloController.sendOrder("takeoff"));
-                break;
-            case Qt::Key_F6:
-                updateSentOrder("land");
-                emit(mTelloController.sendOrder("land"));
-                break;
-            case Qt::Key_W:
-                updateSentOrder("up "+min_control_division_value);
-                emit(mTelloController.sendOrder("up "+min_control_division_value));
-                break;
-            case Qt::Key_A:
-                updateSentOrder("left "+min_control_division_value);
-                emit(mTelloController.sendOrder("left "+min_control_division_value));
-                break;
-            case Qt::Key_S:
-                updateSentOrder("down "+min_control_division_value);
-                emit(mTelloController.sendOrder("down "+min_control_division_value));
-                break;
-            case Qt::Key_D:
-                updateSentOrder("right "+min_control_division_value);
-                emit(mTelloController.sendOrder("right "+min_control_division_value));
-                break;
-            case Qt::Key_Up:
-                updateSentOrder("forward "+min_control_division_value);
-                emit(mTelloController.sendOrder("forward "+min_control_division_value));
-                break;
-            case Qt::Key_Down:
-                updateSentOrder("back "+min_control_division_value);
-                emit(mTelloController.sendOrder("back "+min_control_division_value));
-                break;
-            case Qt::Key_Q:
-                updateSentOrder("ccw "+min_control_division_value);
-                emit(mTelloController.sendOrder("ccw "+min_control_division_value));
-                break;
-            case Qt::Key_E:
-                updateSentOrder("cw "+min_control_division_value);
-                emit(mTelloController.sendOrder("cw "+min_control_division_value));
-                break;
-            default:
+            switch (i)
+            {
+                case 0:
+                    newOrder = "up ";
+                    newOrder.append(moveDistanceStr);
+                    break;
+                case 1:
+                    newOrder = "left ";
+                    newOrder.append(moveDistanceStr);
+                    break;
+                case 2:
+                    newOrder = "down ";
+                    newOrder.append(moveDistanceStr);
+                    break;
+                case 3:
+                    newOrder = "right ";
+                    newOrder.append(moveDistanceStr);
+                    break;
+                case 4:
+                    newOrder = "forward ";
+                    newOrder.append(moveDistanceStr);
+                    break;
+                case 5:
+                    newOrder = "back ";
+                    newOrder.append(moveDistanceStr);
+                    break;
+                case 6:
+                    newOrder = "ccw ";
+                    newOrder.append(rotateDegreeStr);
+                    break;
+                case 7:
+                    newOrder = "cw ";
+                    newOrder.append(rotateDegreeStr);
+                    break;
+                default:
                 break;
             }
-        }
+            updateSentOrder(newOrder);
+            emit(mTelloController.sendOrder(newOrder));
 
+        }
     }
 }
 
+void MainWindow::checkKeyReallyReleased()
+{
+    int keyID = checkKeyList.dequeue();
+    if(!keyPressed[keyID])//really released
+        keyPressed2[keyID] = false;
+}
+
+void MainWindow::updateSensitivityInGui()
+{
+    ui->moveSensitivity->setValue(moveDistance);
+    ui->rotateSensitivity->setValue(rotateDegree);
+    ui->moveSV->display(moveDistance);
+    ui->rotateSV->display(rotateDegree);
+}
 

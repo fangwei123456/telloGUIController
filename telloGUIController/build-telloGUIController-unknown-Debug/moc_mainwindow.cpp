@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[11];
-    char stringdata0[185];
+    QByteArrayData data[13];
+    char stringdata0[231];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,15 +38,18 @@ QT_MOC_LITERAL(5, 89, 15), // "updateSentOrder"
 QT_MOC_LITERAL(6, 105, 8), // "newOrder"
 QT_MOC_LITERAL(7, 114, 19), // "updateReceivedReply"
 QT_MOC_LITERAL(8, 134, 8), // "newReply"
-QT_MOC_LITERAL(9, 143, 12), // "sendKeyOrder"
-QT_MOC_LITERAL(10, 156, 28) // "on_openCameraButton_released"
+QT_MOC_LITERAL(9, 143, 22), // "checkKeyReallyReleased"
+QT_MOC_LITERAL(10, 166, 12), // "sendKeyOrder"
+QT_MOC_LITERAL(11, 179, 28), // "on_openCameraButton_released"
+QT_MOC_LITERAL(12, 208, 22) // "updateSensitivityInGui"
 
     },
     "MainWindow\0on_connectTelloButton_released\0"
     "\0updateTelloStateInGui\0updateTelloWifiSnrInGui\0"
     "updateSentOrder\0newOrder\0updateReceivedReply\0"
-    "newReply\0sendKeyOrder\0"
-    "on_openCameraButton_released"
+    "newReply\0checkKeyReallyReleased\0"
+    "sendKeyOrder\0on_openCameraButton_released\0"
+    "updateSensitivityInGui"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +59,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,13 +67,15 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x08 /* Private */,
-       3,    0,   50,    2, 0x08 /* Private */,
-       4,    0,   51,    2, 0x08 /* Private */,
-       5,    1,   52,    2, 0x08 /* Private */,
-       7,    1,   55,    2, 0x08 /* Private */,
-       9,    0,   58,    2, 0x08 /* Private */,
-      10,    0,   59,    2, 0x08 /* Private */,
+       1,    0,   59,    2, 0x08 /* Private */,
+       3,    0,   60,    2, 0x08 /* Private */,
+       4,    0,   61,    2, 0x08 /* Private */,
+       5,    1,   62,    2, 0x08 /* Private */,
+       7,    1,   65,    2, 0x08 /* Private */,
+       9,    0,   68,    2, 0x08 /* Private */,
+      10,    0,   69,    2, 0x08 /* Private */,
+      11,    0,   70,    2, 0x08 /* Private */,
+      12,    0,   71,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -78,6 +83,8 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    6,
     QMetaType::Void, QMetaType::QString,    8,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -95,8 +102,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 2: _t->updateTelloWifiSnrInGui(); break;
         case 3: _t->updateSentOrder((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 4: _t->updateReceivedReply((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 5: _t->sendKeyOrder(); break;
-        case 6: _t->on_openCameraButton_released(); break;
+        case 5: _t->checkKeyReallyReleased(); break;
+        case 6: _t->sendKeyOrder(); break;
+        case 7: _t->on_openCameraButton_released(); break;
+        case 8: _t->updateSensitivityInGui(); break;
         default: ;
         }
     }
@@ -127,13 +136,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 9;
     }
     return _id;
 }

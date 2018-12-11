@@ -6,7 +6,7 @@
 //sharedData----------------------------
 cv::Mat currentFrame;
 
-QString min_control_division_value = "20";
+
 
 int tello_pitch;
 int tello_roll;

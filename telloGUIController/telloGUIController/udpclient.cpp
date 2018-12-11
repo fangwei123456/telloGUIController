@@ -1,6 +1,7 @@
 #include "udpclient.h"
 #include "tellodata.h"
 #include <QThread>
+#include <QDateTime>
 udpClient::udpClient(QObject *parent) : QObject(parent)
 {
     className = "[udpClient]";
@@ -9,15 +10,10 @@ udpClient::udpClient(QObject *parent) : QObject(parent)
     receivedData = new char[receivedDataSize];
     wifiSnrTimer = new QTimer(this);
     justSentWifiSnrOrder = false;
-    updateTelloStateInGuiInverval = 10;
-    telloStateGotTimes = 0;
     isStateReader = false;
 }
 
-void udpClient::setUpdateTelloStateInGuiInverval(const int newInterval)
-{
-    updateTelloStateInGuiInverval = newInterval;
-}
+
 
 void udpClient::setIPandPort(const QString ip, const quint16 port)
 {
@@ -36,17 +32,13 @@ void udpClient::setIPandPort(const QString ip, const quint16 port)
 
 void udpClient::sendMesg(const QString mesg)
 {
-    udpSocket->writeDatagram(mesg.toUtf8(),serverIP,serverPort);
-    printLog(className,"[send]"+mesg);
-}
 
-void udpClient::sendMesg0()
-{
-    QString mesg = "command";
     udpSocket->writeDatagram(mesg.toUtf8(),serverIP,serverPort);
     printLog(className,"[send]"+mesg);
 
 }
+
+
 
 void udpClient::rename(const QString newName)
 {
@@ -149,12 +141,9 @@ void udpClient::updateTelloState()
            &tello_baro,&tello_time,
            &tello_agx,&tello_agy,&tello_agz);
 
-    telloStateGotTimes = telloStateGotTimes + 1;
-    if(telloStateGotTimes >= updateTelloStateInGuiInverval)
-    {
         emit(newTelloStateGot());
-        telloStateGotTimes = 0;
-    }
+
+
 
     //printf("pitch:%d;roll:%d;yaw:%d;vgx:%d;vgy:%d;vgz:%d;templ:%d;temph:%d;tof:%d;h:%d;bat:%d;baro:%f;time:%d;agx:%f;agy:%f;agz:%f;\n",
     //       tello_pitch,tello_roll,tello_yaw,

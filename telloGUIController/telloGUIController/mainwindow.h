@@ -5,7 +5,7 @@
 #include "tellocontroller.h"
 #include "videostreamreader.h"
 #include <QKeyEvent>
-#include <QVector>
+#include <QQueue>
 #include <QTimer>
 
 /*
@@ -25,7 +25,10 @@
  * ↓    back
  * Q    ccw, ↺
  * E    cw, ↻
- *
+ * 1    decrease move distance in one order
+ * 2    increase move distance in one order
+ * 3    decrease rotate degree in one order
+ * 4    increase rotate degree in one order
  * */
 namespace Ui {
 class MainWindow;
@@ -48,9 +51,13 @@ private:
 
     void keyPressEvent(QKeyEvent *ev);
     void keyReleaseEvent(QKeyEvent *ev);
-    QVector<int> pressedKey;
-    QVector<int>::iterator pressedKeyIter;
+
+    bool keyPressed[8], keyPressed2[8];
+    QQueue<int> checkKeyList;
     QTimer keyOrderSendTimer;
+
+    int moveDistance, rotateDegree;
+    QString moveDistanceStr, rotateDegreeStr;
 private slots:
 
 
@@ -61,12 +68,16 @@ private slots:
     void updateSentOrder(const QString newOrder);
     void updateReceivedReply(const QString newReply);
 
+    void checkKeyReallyReleased();
     void sendKeyOrder();
     void on_openCameraButton_released();
+
+    void updateSensitivityInGui();
 
 
 private:
     Ui::MainWindow *ui;
 };
+
 
 #endif // MAINWINDOW_H

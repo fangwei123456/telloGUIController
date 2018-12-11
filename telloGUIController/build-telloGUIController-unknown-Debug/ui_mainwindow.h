@@ -80,12 +80,21 @@ public:
     QLCDNumber *telloAgxV;
     QLCDNumber *telloAgyV;
     QLCDNumber *telloAgzV;
+    QLabel *sensitivityLabel;
+    QLCDNumber *moveSV;
+    QWidget *formLayoutWidget_5;
+    QFormLayout *sensitivityFormLayout;
+    QLabel *moveSensitivityLabel;
+    QSlider *moveSensitivity;
+    QLabel *rotateSensitivityLabel;
+    QSlider *rotateSensitivity;
+    QLCDNumber *rotateSV;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(818, 715);
+        MainWindow->resize(1040, 813);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         connectTelloButton = new QPushButton(centralWidget);
@@ -332,7 +341,7 @@ public:
         telloHLabel->setFont(font1);
         orderTextBrowser = new QTextBrowser(centralWidget);
         orderTextBrowser->setObjectName(QStringLiteral("orderTextBrowser"));
-        orderTextBrowser->setGeometry(QRect(460, 300, 191, 411));
+        orderTextBrowser->setGeometry(QRect(460, 440, 191, 351));
         telloTof = new QProgressBar(centralWidget);
         telloTof->setObjectName(QStringLiteral("telloTof"));
         telloTof->setGeometry(QRect(480, 80, 191, 21));
@@ -342,21 +351,21 @@ public:
         telloTof->setOrientation(Qt::Horizontal);
         replyTextBrowser = new QTextBrowser(centralWidget);
         replyTextBrowser->setObjectName(QStringLiteral("replyTextBrowser"));
-        replyTextBrowser->setGeometry(QRect(660, 300, 121, 411));
+        replyTextBrowser->setGeometry(QRect(660, 440, 121, 351));
         keyboardImgLabel = new QLabel(centralWidget);
         keyboardImgLabel->setObjectName(QStringLiteral("keyboardImgLabel"));
-        keyboardImgLabel->setGeometry(QRect(10, 520, 431, 181));
+        keyboardImgLabel->setGeometry(QRect(10, 630, 431, 181));
         keyboardImgLabel->setStyleSheet(QStringLiteral("border-image: url(:/bkg/keyboard.png);"));
         keyboardTextBrowser = new QTextBrowser(centralWidget);
         keyboardTextBrowser->setObjectName(QStringLiteral("keyboardTextBrowser"));
         keyboardTextBrowser->setGeometry(QRect(10, 430, 431, 81));
         orderLabel = new QLabel(centralWidget);
         orderLabel->setObjectName(QStringLiteral("orderLabel"));
-        orderLabel->setGeometry(QRect(460, 270, 61, 27));
+        orderLabel->setGeometry(QRect(460, 410, 61, 27));
         orderLabel->setFont(font);
         replyLabel = new QLabel(centralWidget);
         replyLabel->setObjectName(QStringLiteral("replyLabel"));
-        replyLabel->setGeometry(QRect(660, 270, 61, 27));
+        replyLabel->setGeometry(QRect(660, 410, 61, 27));
         replyLabel->setFont(font);
         telloAgxV = new QLCDNumber(centralWidget);
         telloAgxV->setObjectName(QStringLiteral("telloAgxV"));
@@ -370,6 +379,62 @@ public:
         telloAgzV->setObjectName(QStringLiteral("telloAgzV"));
         telloAgzV->setGeometry(QRect(630, 210, 101, 41));
         telloAgzV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
+        sensitivityLabel = new QLabel(centralWidget);
+        sensitivityLabel->setObjectName(QStringLiteral("sensitivityLabel"));
+        sensitivityLabel->setGeometry(QRect(450, 270, 121, 34));
+        sensitivityLabel->setFont(font);
+        moveSV = new QLCDNumber(centralWidget);
+        moveSV->setObjectName(QStringLiteral("moveSV"));
+        moveSV->setGeometry(QRect(800, 310, 101, 41));
+        moveSV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
+        moveSV->setProperty("intValue", QVariant(20));
+        formLayoutWidget_5 = new QWidget(centralWidget);
+        formLayoutWidget_5->setObjectName(QStringLiteral("formLayoutWidget_5"));
+        formLayoutWidget_5->setGeometry(QRect(450, 310, 341, 80));
+        sensitivityFormLayout = new QFormLayout(formLayoutWidget_5);
+        sensitivityFormLayout->setSpacing(6);
+        sensitivityFormLayout->setContentsMargins(11, 11, 11, 11);
+        sensitivityFormLayout->setObjectName(QStringLiteral("sensitivityFormLayout"));
+        sensitivityFormLayout->setContentsMargins(0, 0, 0, 0);
+        moveSensitivityLabel = new QLabel(formLayoutWidget_5);
+        moveSensitivityLabel->setObjectName(QStringLiteral("moveSensitivityLabel"));
+        moveSensitivityLabel->setFont(font);
+
+        sensitivityFormLayout->setWidget(0, QFormLayout::LabelRole, moveSensitivityLabel);
+
+        moveSensitivity = new QSlider(formLayoutWidget_5);
+        moveSensitivity->setObjectName(QStringLiteral("moveSensitivity"));
+        moveSensitivity->setEnabled(false);
+        moveSensitivity->setMinimum(20);
+        moveSensitivity->setMaximum(100);
+        moveSensitivity->setOrientation(Qt::Horizontal);
+        moveSensitivity->setTickPosition(QSlider::TicksAbove);
+        moveSensitivity->setTickInterval(5);
+
+        sensitivityFormLayout->setWidget(0, QFormLayout::FieldRole, moveSensitivity);
+
+        rotateSensitivityLabel = new QLabel(formLayoutWidget_5);
+        rotateSensitivityLabel->setObjectName(QStringLiteral("rotateSensitivityLabel"));
+        rotateSensitivityLabel->setFont(font);
+
+        sensitivityFormLayout->setWidget(1, QFormLayout::LabelRole, rotateSensitivityLabel);
+
+        rotateSensitivity = new QSlider(formLayoutWidget_5);
+        rotateSensitivity->setObjectName(QStringLiteral("rotateSensitivity"));
+        rotateSensitivity->setEnabled(false);
+        rotateSensitivity->setMinimum(1);
+        rotateSensitivity->setMaximum(360);
+        rotateSensitivity->setOrientation(Qt::Horizontal);
+        rotateSensitivity->setTickPosition(QSlider::TicksAbove);
+        rotateSensitivity->setTickInterval(20);
+
+        sensitivityFormLayout->setWidget(1, QFormLayout::FieldRole, rotateSensitivity);
+
+        rotateSV = new QLCDNumber(centralWidget);
+        rotateSV->setObjectName(QStringLiteral("rotateSV"));
+        rotateSV->setGeometry(QRect(800, 350, 101, 41));
+        rotateSV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
+        rotateSV->setProperty("intValue", QVariant(1));
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -436,6 +501,9 @@ public:
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">                        </p></body></html>", 0));
         orderLabel->setText(QApplication::translate("MainWindow", "order", 0));
         replyLabel->setText(QApplication::translate("MainWindow", "reply", 0));
+        sensitivityLabel->setText(QApplication::translate("MainWindow", "Sensitivity", 0));
+        moveSensitivityLabel->setText(QApplication::translate("MainWindow", "move", 0));
+        rotateSensitivityLabel->setText(QApplication::translate("MainWindow", "rotate", 0));
     } // retranslateUi
 
 };

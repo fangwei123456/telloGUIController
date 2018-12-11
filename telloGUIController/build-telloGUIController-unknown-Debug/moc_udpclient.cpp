@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_udpClient_t {
-    QByteArrayData data[15];
-    char stringdata0[162];
+    QByteArrayData data[14];
+    char stringdata0[152];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,16 +41,15 @@ QT_MOC_LITERAL(8, 87, 16), // "newTelloReplyGot"
 QT_MOC_LITERAL(9, 104, 8), // "newReply"
 QT_MOC_LITERAL(10, 113, 8), // "sendMesg"
 QT_MOC_LITERAL(11, 122, 4), // "mesg"
-QT_MOC_LITERAL(12, 127, 9), // "sendMesg0"
-QT_MOC_LITERAL(13, 137, 8), // "readMesg"
-QT_MOC_LITERAL(14, 146, 15) // "getTelloWifiSnr"
+QT_MOC_LITERAL(12, 127, 8), // "readMesg"
+QT_MOC_LITERAL(13, 136, 15) // "getTelloWifiSnr"
 
     },
     "udpClient\0newMesgGot\0\0const char*\0"
     "newMesg\0mesgSize\0newTelloStateGot\0"
     "newTelloWifiSnrGot\0newTelloReplyGot\0"
-    "newReply\0sendMesg\0mesg\0sendMesg0\0"
-    "readMesg\0getTelloWifiSnr"
+    "newReply\0sendMesg\0mesg\0readMesg\0"
+    "getTelloWifiSnr"
 };
 #undef QT_MOC_LITERAL
 
@@ -60,7 +59,7 @@ static const uint qt_meta_data_udpClient[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -68,16 +67,15 @@ static const uint qt_meta_data_udpClient[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   54,    2, 0x06 /* Public */,
-       6,    0,   59,    2, 0x06 /* Public */,
-       7,    0,   60,    2, 0x06 /* Public */,
-       8,    1,   61,    2, 0x06 /* Public */,
+       1,    2,   49,    2, 0x06 /* Public */,
+       6,    0,   54,    2, 0x06 /* Public */,
+       7,    0,   55,    2, 0x06 /* Public */,
+       8,    1,   56,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      10,    1,   64,    2, 0x0a /* Public */,
-      12,    0,   67,    2, 0x0a /* Public */,
-      13,    0,   68,    2, 0x0a /* Public */,
-      14,    0,   69,    2, 0x0a /* Public */,
+      10,    1,   59,    2, 0x0a /* Public */,
+      12,    0,   62,    2, 0x0a /* Public */,
+      13,    0,   63,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, QMetaType::LongLong,    4,    5,
@@ -87,7 +85,6 @@ static const uint qt_meta_data_udpClient[] = {
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,   11,
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -105,9 +102,8 @@ void udpClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 2: _t->newTelloWifiSnrGot(); break;
         case 3: _t->newTelloReplyGot((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 4: _t->sendMesg((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 5: _t->sendMesg0(); break;
-        case 6: _t->readMesg(); break;
-        case 7: _t->getTelloWifiSnr(); break;
+        case 5: _t->readMesg(); break;
+        case 6: _t->getTelloWifiSnr(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -165,13 +161,13 @@ int udpClient::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 7;
     }
     return _id;
 }

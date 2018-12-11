@@ -5,6 +5,7 @@
 #include <QUdpSocket>
 #include <QFile>
 #include <QTimer>
+#include <QTime>
 
 class udpClient : public QObject
 {
@@ -20,7 +21,7 @@ public:
     void rename(const QString newName);
 
     void updateTelloState();
-    void setUpdateTelloStateInGuiInverval(const int newInterval);
+
 private:
     QString className;
     QUdpSocket *udpSocket;
@@ -33,8 +34,6 @@ private:
     QTimer *wifiSnrTimer;//send oder to get wifi snr
     bool justSentWifiSnrOrder;//afer sending wifi snr order, this becomes true; after getting, becomes false
 
-    int updateTelloStateInGuiInverval;//every ? state info got and emit signal to update tello state
-    int telloStateGotTimes;//how many times that got tello state info, clear after emitting update signal
 
 signals:
     void newMesgGot(const char *newMesg, const qint64 mesgSize);
@@ -44,7 +43,7 @@ signals:
 
 public slots:
     void sendMesg(const QString mesg);
-    void sendMesg0();
+
     void readMesg();
     void getTelloWifiSnr();
 
