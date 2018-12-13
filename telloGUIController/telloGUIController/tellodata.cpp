@@ -4,7 +4,10 @@
 
 
 //sharedData----------------------------
+
 cv::Mat currentFrame;
+
+bool sendNextOrder;
 
 
 

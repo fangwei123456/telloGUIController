@@ -38,6 +38,7 @@ void videoStreamReader::openStream()
 
     while(1)
     {
+
         if(!camera.read(currentFrame))
         {
             printLog(className,"[error]can't open frame from stream");
@@ -45,6 +46,6 @@ void videoStreamReader::openStream()
         }
 
         imshow("tello camera",currentFrame);
-        cv::waitKey(33);
+        cv::waitKey(33);//30 FPS
     }
 }

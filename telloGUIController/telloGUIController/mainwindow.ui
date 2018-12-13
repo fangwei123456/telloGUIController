@@ -587,7 +587,7 @@ p, li { white-space: pre-wrap; }
       <x>330</x>
       <y>130</y>
       <width>531</width>
-      <height>61</height>
+      <height>62</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="sensitivityFormLayout">

@@ -6,9 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    sendNextOrder = true;
 
 
     ui->setupUi(this);
+    ui->orderLabel->setStyleSheet("color:green");
     ui->moveSensitivity->setMaximum(MAX_MOVE_DISTANCE);
     ui->moveSensitivity->setMinimum(MIN_MOVE_DISTANCE);
     ui->rotateSensitivity->setMinimum(MIN_ROTATE_DEGREE);
@@ -31,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
         keyPressed[i] = false;
         keyPressed2[i] = false;
     }
+
 
     moveDistance = MIN_MOVE_DISTANCE;
     rotateDegree = MIN_ROTATE_DEGREE;
@@ -98,6 +101,8 @@ void MainWindow::updateSentOrder(const QString newOrder)
 
 void MainWindow::updateReceivedReply(const QString newReply)
 {
+    sendNextOrder = true;
+    ui->orderLabel->setStyleSheet("color:green");
     replyCounter = replyCounter + 1;
     ui->replyTextBrowser->append("[" + QString::number(replyCounter) + "] " + newReply);
 }
@@ -111,32 +116,49 @@ void MainWindow::on_openCameraButton_released()
 
 void MainWindow::keyPressEvent(QKeyEvent *ev)
 {
+
+    if(sendNextOrder==false)
+    {
+        return;
+    }
     int keyID = -1;
     switch (ev->key())
     {
         case Qt::Key_F1:
             updateSentOrder("command");
             emit(mTelloController.sendOrder("command"));
+            sendNextOrder = false;
+            ui->orderLabel->setStyleSheet("color:red");
             break;
         case Qt::Key_F2:
             updateSentOrder("emergency");
             emit(mTelloController.sendOrder("emergency"));
+            sendNextOrder = false;
+            ui->orderLabel->setStyleSheet("color:red");
             break;
         case Qt::Key_F3:
             updateSentOrder("streamon");
             emit(mTelloController.sendOrder("streamon"));
+            sendNextOrder = false;
+            ui->orderLabel->setStyleSheet("color:red");
             break;
         case Qt::Key_F4:
             updateSentOrder("streamoff");
             emit(mTelloController.sendOrder("streamoff"));
+            sendNextOrder = false;
+            ui->orderLabel->setStyleSheet("color:red");
             break;
         case Qt::Key_F5:
             updateSentOrder("takeoff");
             emit(mTelloController.sendOrder("takeoff"));
+            sendNextOrder = false;
+            ui->orderLabel->setStyleSheet("color:red");
             break;
         case Qt::Key_F6:
             updateSentOrder("land");
             emit(mTelloController.sendOrder("land"));
+            sendNextOrder = false;
+            ui->orderLabel->setStyleSheet("color:red");
             break;
         case Qt::Key_W:
             keyID = 0;
@@ -202,13 +224,17 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
     {
         keyPressed[keyID] = true;
         keyPressed2[keyID] = true;
-
     }
 
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *ev)
 {
+
+    if(sendNextOrder==false)
+    {
+        return;
+    }
     int keyID = -1;
     switch (ev->key())
     {
@@ -250,53 +276,119 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ev)
 
 void MainWindow::sendKeyOrder()
 {
-    QString newOrder;
+
+
+    if(keyPressed2[0] && keyPressed2[2])//W + S = NULL
+    {
+        keyPressed2[0] = false;
+        keyPressed2[2] = false;
+    }
+    if(keyPressed2[1] && keyPressed2[3])//A + D = NULL
+    {
+        keyPressed2[1] = false;
+        keyPressed2[3] = false;
+    }
+    if(keyPressed2[4] && keyPressed2[5])//↑ + ↓ = NULL
+    {
+        keyPressed2[4] = false;
+        keyPressed2[5] = false;
+    }
+    if(keyPressed2[6] && keyPressed2[7])//Q + E = NULL
+    {
+        keyPressed2[6] = false;
+        keyPressed2[7] = false;
+    }
+
+    int sumOfKeyPressed = 0;
     for(int i=0; i<8; i++)
     {
         if(keyPressed2[i])
-        {
-            switch (i)
-            {
-                case 0:
-                    newOrder = "up ";
-                    newOrder.append(moveDistanceStr);
-                    break;
-                case 1:
-                    newOrder = "left ";
-                    newOrder.append(moveDistanceStr);
-                    break;
-                case 2:
-                    newOrder = "down ";
-                    newOrder.append(moveDistanceStr);
-                    break;
-                case 3:
-                    newOrder = "right ";
-                    newOrder.append(moveDistanceStr);
-                    break;
-                case 4:
-                    newOrder = "forward ";
-                    newOrder.append(moveDistanceStr);
-                    break;
-                case 5:
-                    newOrder = "back ";
-                    newOrder.append(moveDistanceStr);
-                    break;
-                case 6:
-                    newOrder = "ccw ";
-                    newOrder.append(rotateDegreeStr);
-                    break;
-                case 7:
-                    newOrder = "cw ";
-                    newOrder.append(rotateDegreeStr);
-                    break;
-                default:
-                break;
-            }
-            updateSentOrder(newOrder);
-            emit(mTelloController.sendOrder(newOrder));
-
-        }
+            sumOfKeyPressed++;
     }
+    QString newOrder;
+    if(sumOfKeyPressed==0)
+        return;
+
+    if(sumOfKeyPressed==1)
+    {
+        if(keyPressed2[0])
+        {
+            newOrder = "up ";
+            newOrder.append(moveDistanceStr);
+        }
+        else
+        if(keyPressed2[1])
+        {
+            newOrder = "left ";
+            newOrder.append(moveDistanceStr);
+        }
+        else
+        if(keyPressed2[2])
+        {
+            newOrder = "down ";
+            newOrder.append(moveDistanceStr);
+        }
+        else
+        if(keyPressed2[3])
+        {
+            newOrder = "right ";
+            newOrder.append(moveDistanceStr);
+        }
+        else
+        if(keyPressed2[4])
+        {
+            newOrder = "forward ";
+            newOrder.append(moveDistanceStr);
+        }
+        else
+        if(keyPressed2[5])
+        {
+            newOrder = "back ";
+            newOrder.append(moveDistanceStr);
+        }
+        else
+        if(keyPressed2[6])
+        {
+            newOrder = "ccw ";
+            newOrder.append(rotateDegreeStr);
+        }
+        else
+        if(keyPressed2[7])
+        {
+            newOrder = "cw ";
+            newOrder.append(rotateDegreeStr);
+        }
+        updateSentOrder(newOrder);
+        emit(mTelloController.sendOrder(newOrder));
+
+        return;
+    }
+
+    if(sumOfKeyPressed==2)
+    {
+        if(keyPressed2[0])
+            newOrder.append("up ");
+        if(keyPressed2[1])
+            newOrder.append("left ");
+        if(keyPressed2[2])
+            newOrder.append("down ");
+        if(keyPressed2[3])
+            newOrder.append("right ");
+        if(keyPressed2[4])
+            newOrder.append("forward ");
+        if(keyPressed2[5])
+            newOrder.append("down ");
+
+        newOrder.append(moveDistanceStr);
+        updateSentOrder(newOrder);
+        emit(mTelloController.sendOrder(newOrder));
+        return;
+
+    }
+
+
+
+
 }
 
 void MainWindow::checkKeyReallyReleased()

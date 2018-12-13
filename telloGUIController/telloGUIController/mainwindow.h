@@ -58,6 +58,7 @@ private:
 
     int moveDistance, rotateDegree;
     QString moveDistanceStr, rotateDegreeStr;
+
 private slots:
 
 

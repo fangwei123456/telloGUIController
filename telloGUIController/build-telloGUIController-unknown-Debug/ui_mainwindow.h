@@ -341,7 +341,7 @@ public:
         telloAgzV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
         formLayoutWidget_5 = new QWidget(centralWidget);
         formLayoutWidget_5->setObjectName(QStringLiteral("formLayoutWidget_5"));
-        formLayoutWidget_5->setGeometry(QRect(330, 130, 531, 61));
+        formLayoutWidget_5->setGeometry(QRect(330, 130, 531, 62));
         sensitivityFormLayout = new QFormLayout(formLayoutWidget_5);
         sensitivityFormLayout->setSpacing(6);
         sensitivityFormLayout->setContentsMargins(11, 11, 11, 11);
@@ -489,9 +489,7 @@ public:
 "<p "
                         "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">2    increase move distance                    </p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">3    decrease rotate degree                    </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">4    increase rotate degree                    </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">5    decrease cruise speed                     </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">6    increase cruise speed                     </p></body></html>", 0));
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">4    increase rotate degree                    </p></body></html>", 0));
         orderLabel->setText(QApplication::translate("MainWindow", "Order", 0));
         replyLabel->setText(QApplication::translate("MainWindow", "Reply", 0));
         moveSensitivityLabel->setText(QApplication::translate("MainWindow", "Move Sensitivity", 0));

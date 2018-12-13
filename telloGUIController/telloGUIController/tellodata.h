@@ -3,6 +3,7 @@
 #include <QString>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
+#include <QMutex>
 
 #define MIN_MOVE_DISTANCE 20//tello's min move distance in one order is 20cm
 #define MAX_MOVE_DISTANCE 100//tello's max move distance in one order is 100cm
@@ -18,8 +19,9 @@
 
 
 //sharedData----------------------------
-extern cv::Mat currentFrame;
 
+extern cv::Mat currentFrame;
+extern bool sendNextOrder;//only when tello reply last order that we can send next order
 
 //state data will come in 10HZ
 extern int tello_pitch;
