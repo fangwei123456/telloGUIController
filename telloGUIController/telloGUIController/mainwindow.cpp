@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     ui->setupUi(this);
+    ui->moveSensitivity->setMaximum(MAX_MOVE_DISTANCE);
+    ui->moveSensitivity->setMinimum(MIN_MOVE_DISTANCE);
+    ui->rotateSensitivity->setMinimum(MIN_ROTATE_DEGREE);
+    ui->rotateSensitivity->setMaximum(MAX_ROTATE_DEGREE);
     this->grabKeyboard();
 
 
@@ -20,7 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
     orderCounter = 0;
     replyCounter = 0;
     connect(&keyOrderSendTimer,SIGNAL(timeout()),this,SLOT(sendKeyOrder()));
-    keyOrderSendTimer.start(MIN_SEND_ORDER_INTERVAL);
+    keyOrderSendTimer.start(SEND_ORDER_TIMER_INTERVAL);
+
     for(int i=0; i<8; i++)
     {
         keyPressed[i] = false;
@@ -162,7 +167,7 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
             {
                 moveDistance--;
                 moveDistanceStr = QString::number(moveDistance);
-                updateSensitivityInGui();
+                updateMoveSensitivityInGui();
             }
             break;
         case Qt::Key_2:
@@ -170,7 +175,7 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
             {
                 moveDistance++;
                 moveDistanceStr = QString::number(moveDistance);
-                updateSensitivityInGui();
+                updateMoveSensitivityInGui();
             }
             break;
         case Qt::Key_3:
@@ -178,7 +183,7 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
             {
                 rotateDegree--;
                 rotateDegreeStr = QString::number(rotateDegree);
-                updateSensitivityInGui();
+                updateRotateSensitivityInGui();
             }
             break;
         case Qt::Key_4:
@@ -186,7 +191,7 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
         {
             rotateDegree++;
             rotateDegreeStr = QString::number(rotateDegree);
-            updateSensitivityInGui();
+            updateRotateSensitivityInGui();
         }
             break;
         default:
@@ -245,25 +250,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ev)
 
 void MainWindow::sendKeyOrder()
 {
-     /*
-      * key  function
-      * same as fly a plane in GTA
-      * F1   connect to tello and start command mode
-      * F2   stop tello's engine, EMERGENCY
-      * F3   open video stream
-      * F4   off video stream
-      * F5   takeoff
-      * F6   land
-      * W    up
-      * S    down
-      * A    left
-      * D    right
-      * ↑    forward
-      * ↓    back
-      * Q    ccw, ↺
-      * E    cw, ↻
-      *
-      * */
     QString newOrder;
     for(int i=0; i<8; i++)
     {
@@ -320,11 +306,14 @@ void MainWindow::checkKeyReallyReleased()
         keyPressed2[keyID] = false;
 }
 
-void MainWindow::updateSensitivityInGui()
+void MainWindow::updateMoveSensitivityInGui()
 {
     ui->moveSensitivity->setValue(moveDistance);
-    ui->rotateSensitivity->setValue(rotateDegree);
-    ui->moveSV->display(moveDistance);
-    ui->rotateSV->display(rotateDegree);
 }
+
+void MainWindow::updateRotateSensitivityInGui()
+{
+    ui->rotateSensitivity->setValue(rotateDegree);
+}
+
 

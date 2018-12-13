@@ -25,10 +25,10 @@
  * ↓    back
  * Q    ccw, ↺
  * E    cw, ↻
- * 1    decrease move distance in one order
- * 2    increase move distance in one order
- * 3    decrease rotate degree in one order
- * 4    increase rotate degree in one order
+ * 1    decrease move distance
+ * 2    increase move distance
+ * 3    decrease rotate degree
+ * 4    increase rotate degree
  * */
 namespace Ui {
 class MainWindow;
@@ -72,8 +72,8 @@ private slots:
     void sendKeyOrder();
     void on_openCameraButton_released();
 
-    void updateSensitivityInGui();
-
+    void updateMoveSensitivityInGui();
+    void updateRotateSensitivityInGui();
 
 private:
     Ui::MainWindow *ui;

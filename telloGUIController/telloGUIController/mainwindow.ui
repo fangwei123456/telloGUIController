@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1040</width>
+    <width>1229</width>
     <height>813</height>
    </rect>
   </property>
@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="connectTelloButton">
     <property name="geometry">
      <rect>
-      <x>690</x>
+      <x>890</x>
       <y>10</y>
       <width>121</width>
       <height>41</height>
@@ -30,7 +30,7 @@
    <widget class="QPushButton" name="openCameraButton">
     <property name="geometry">
      <rect>
-      <x>690</x>
+      <x>890</x>
       <y>70</y>
       <width>121</width>
       <height>41</height>
@@ -58,7 +58,7 @@
         </font>
        </property>
        <property name="text">
-        <string>bat</string>
+        <string>Bat</string>
        </property>
       </widget>
      </item>
@@ -99,10 +99,22 @@
       <x>20</x>
       <y>130</y>
       <width>301</width>
-      <height>121</height>
+      <height>101</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="vFormLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="telloVgxLabel">
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Vgx</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="1">
       <widget class="QProgressBar" name="telloVgx">
        <property name="styleSheet">
@@ -160,25 +172,13 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="telloVgxLabel">
-       <property name="font">
-        <font>
-         <pointsize>18</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Vgx</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="formLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>130</y>
+      <x>460</x>
+      <y>280</y>
       <width>291</width>
       <height>126</height>
      </rect>
@@ -288,96 +288,13 @@
      </item>
     </layout>
    </widget>
-   <widget class="QProgressBar" name="telloBaro">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>50</y>
-      <width>191</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <number>-100</number>
-    </property>
-    <property name="maximum">
-     <number>0</number>
-    </property>
-    <property name="value">
-     <number>-50</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <property name="format">
-     <string>%v</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="telloBaroLabel">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>50</y>
-      <width>121</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Height(Baro)</string>
-    </property>
-   </widget>
-   <widget class="QProgressBar" name="telloH">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>20</y>
-      <width>191</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <number>30</number>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <property name="format">
-     <string>%v</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="telloTofLabel">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>80</y>
-      <width>121</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Height(Tof)</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="formLayoutWidget_4">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>280</y>
       <width>301</width>
-      <height>149</height>
+      <height>131</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="degreeFormLayout">
@@ -389,7 +306,7 @@
         </font>
        </property>
        <property name="text">
-        <string>pitch</string>
+        <string>Pitch</string>
        </property>
       </widget>
      </item>
@@ -401,7 +318,7 @@
         </font>
        </property>
        <property name="text">
-        <string>roll</string>
+        <string>Roll</string>
        </property>
       </widget>
      </item>
@@ -435,7 +352,7 @@
         </font>
        </property>
        <property name="text">
-        <string>yaw</string>
+        <string>Yaw</string>
        </property>
       </widget>
      </item>
@@ -521,24 +438,6 @@
      <string notr="true">color: rgb(255, 0, 0);</string>
     </property>
    </widget>
-   <widget class="QLabel" name="telloHLabel">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>20</y>
-      <width>121</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Height(Relative)</string>
-    </property>
-   </widget>
    <widget class="QTextBrowser" name="orderTextBrowser">
     <property name="geometry">
      <rect>
@@ -554,31 +453,6 @@
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QProgressBar" name="telloTof">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>80</y>
-      <width>191</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <number>-1</number>
-    </property>
-    <property name="maximum">
-     <number>400</number>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <property name="format">
-     <string>%v</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="replyTextBrowser">
@@ -598,29 +472,13 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="keyboardImgLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>630</y>
-      <width>431</width>
-      <height>181</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-image: url(:/bkg/keyboard.png);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QTextBrowser" name="keyboardTextBrowser">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>430</y>
       <width>431</width>
-      <height>81</height>
+      <height>361</height>
      </rect>
     </property>
     <property name="html">
@@ -628,21 +486,24 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;F1   connect to tello and start command mode &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;F2   stop tello's engine, EMERGENCY   &lt;/span&gt;       &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;F3   open video stream                       &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;F4   off video stream                        &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;F5   takeoff                                 &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;F6   land                                    &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;W    up                                      &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;S    down                                    &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;A    left                                    &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;D    right &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Q    ccw, ↺                                  &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;E    cw, ↻                                             &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;↑    forward                                 &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;↓    back                                    &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;                        &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;F1   connect to tello and start command mode   &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;F2   stop tello's engine, EMERGENCY &lt;/span&gt;           &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;F3   open video stream                         &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;F4   off video stream                          &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;F5   takeoff                                   &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;F6   land                                      &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;W    up                                        &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;S    down                                      &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;A    left                                      &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;D    right                                     &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;↑    forward                                   &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;↓    back                                      &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Q    ccw, ↺                                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;E    cw, ↻                                     &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1    decrease move distance                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2    increase move distance                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3    decrease rotate degree                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4    increase rotate degree                    &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="orderLabel">
@@ -650,7 +511,7 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>460</x>
       <y>410</y>
-      <width>61</width>
+      <width>71</width>
       <height>27</height>
      </rect>
     </property>
@@ -660,7 +521,7 @@ p, li { white-space: pre-wrap; }
      </font>
     </property>
     <property name="text">
-     <string>order</string>
+     <string>Order</string>
     </property>
    </widget>
    <widget class="QLabel" name="replyLabel">
@@ -678,14 +539,14 @@ p, li { white-space: pre-wrap; }
      </font>
     </property>
     <property name="text">
-     <string>reply</string>
+     <string>Reply</string>
     </property>
    </widget>
    <widget class="QLCDNumber" name="telloAgxV">
     <property name="geometry">
      <rect>
-      <x>630</x>
-      <y>130</y>
+      <x>760</x>
+      <y>280</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -697,8 +558,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QLCDNumber" name="telloAgyV">
     <property name="geometry">
      <rect>
-      <x>630</x>
-      <y>170</y>
+      <x>760</x>
+      <y>320</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -710,57 +571,23 @@ p, li { white-space: pre-wrap; }
    <widget class="QLCDNumber" name="telloAgzV">
     <property name="geometry">
      <rect>
-      <x>630</x>
-      <y>210</y>
+      <x>760</x>
+      <y>360</y>
       <width>101</width>
       <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(255, 0, 0);</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="sensitivityLabel">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>270</y>
-      <width>121</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>18</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Sensitivity</string>
-    </property>
-   </widget>
-   <widget class="QLCDNumber" name="moveSV">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>310</y>
-      <width>101</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 0, 0);</string>
-    </property>
-    <property name="intValue" stdset="0">
-     <number>20</number>
     </property>
    </widget>
    <widget class="QWidget" name="formLayoutWidget_5">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>310</y>
-      <width>341</width>
-      <height>80</height>
+      <x>330</x>
+      <y>130</y>
+      <width>531</width>
+      <height>61</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="sensitivityFormLayout">
@@ -772,29 +599,26 @@ p, li { white-space: pre-wrap; }
         </font>
        </property>
        <property name="text">
-        <string>move</string>
+        <string>Move Sensitivity</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QSlider" name="moveSensitivity">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
+      <widget class="QProgressBar" name="moveSensitivity">
        <property name="minimum">
-        <number>20</number>
+        <number>-1</number>
        </property>
        <property name="maximum">
-        <number>100</number>
+        <number>400</number>
+       </property>
+       <property name="value">
+        <number>20</number>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="tickPosition">
-        <enum>QSlider::TicksAbove</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
+       <property name="format">
+        <string>%v</string>
        </property>
       </widget>
      </item>
@@ -806,49 +630,132 @@ p, li { white-space: pre-wrap; }
         </font>
        </property>
        <property name="text">
-        <string>rotate</string>
+        <string>Rotate Sensitivity</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QSlider" name="rotateSensitivity">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
+      <widget class="QProgressBar" name="rotateSensitivity">
        <property name="minimum">
-        <number>1</number>
+        <number>-1</number>
        </property>
        <property name="maximum">
-        <number>360</number>
+        <number>400</number>
+       </property>
+       <property name="value">
+        <number>1</number>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="tickPosition">
-        <enum>QSlider::TicksAbove</enum>
-       </property>
-       <property name="tickInterval">
-        <number>20</number>
+       <property name="format">
+        <string>%v</string>
        </property>
       </widget>
      </item>
     </layout>
    </widget>
-   <widget class="QLCDNumber" name="rotateSV">
+   <widget class="QWidget" name="formLayoutWidget_6">
     <property name="geometry">
      <rect>
-      <x>800</x>
-      <y>350</y>
-      <width>101</width>
-      <height>41</height>
+      <x>330</x>
+      <y>20</y>
+      <width>531</width>
+      <height>101</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 0, 0);</string>
-    </property>
-    <property name="intValue" stdset="0">
-     <number>1</number>
-    </property>
+    <layout class="QFormLayout" name="heightFormLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="telloHLabel">
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Height(Relative)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QProgressBar" name="telloH">
+       <property name="maximum">
+        <number>30</number>
+       </property>
+       <property name="value">
+        <number>24</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="format">
+        <string>%v</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="telloBaroLabel">
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Height(Baro)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QProgressBar" name="telloBaro">
+       <property name="minimum">
+        <number>-100</number>
+       </property>
+       <property name="maximum">
+        <number>0</number>
+       </property>
+       <property name="value">
+        <number>-50</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="format">
+        <string>%v</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="telloTofLabel">
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Height(Tof)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QProgressBar" name="telloTof">
+       <property name="minimum">
+        <number>-1</number>
+       </property>
+       <property name="maximum">
+        <number>400</number>
+       </property>
+       <property name="value">
+        <number>24</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="format">
+        <string>%v</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>

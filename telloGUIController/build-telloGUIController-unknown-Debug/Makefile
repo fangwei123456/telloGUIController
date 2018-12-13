@@ -53,8 +53,7 @@ SOURCES       = ../telloGUIController/main.cpp \
 		../telloGUIController/tellodata.cpp \
 		../telloGUIController/udpclient.cpp \
 		../telloGUIController/tellocontroller.cpp \
-		../telloGUIController/videostreamreader.cpp qrc_resourcefile.cpp \
-		moc_mainwindow.cpp \
+		../telloGUIController/videostreamreader.cpp moc_mainwindow.cpp \
 		moc_udpclient.cpp \
 		moc_tellocontroller.cpp \
 		moc_videostreamreader.cpp
@@ -64,7 +63,6 @@ OBJECTS       = main.o \
 		udpclient.o \
 		tellocontroller.o \
 		videostreamreader.o \
-		qrc_resourcefile.o \
 		moc_mainwindow.o \
 		moc_udpclient.o \
 		moc_tellocontroller.o \
@@ -228,7 +226,6 @@ Makefile: ../telloGUIController/telloGUIController.pro /usr/lib/x86_64-linux-gnu
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../telloGUIController/telloGUIController.pro \
-		../telloGUIController/resourcefile.qrc \
 		/usr/lib/x86_64-linux-gnu/libQt5Widgets.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Gui.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Network.prl \
@@ -294,7 +291,6 @@ Makefile: ../telloGUIController/telloGUIController.pro /usr/lib/x86_64-linux-gnu
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 ../telloGUIController/telloGUIController.pro:
-../telloGUIController/resourcefile.qrc:
 /usr/lib/x86_64-linux-gnu/libQt5Widgets.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Gui.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Network.prl:
@@ -313,7 +309,6 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../telloGUIController/resourcefile.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../telloGUIController/mainwindow.h ../telloGUIController/tellodata.h ../telloGUIController/udpclient.h ../telloGUIController/tellocontroller.h ../telloGUIController/videostreamreader.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../telloGUIController/main.cpp ../telloGUIController/mainwindow.cpp ../telloGUIController/tellodata.cpp ../telloGUIController/udpclient.cpp ../telloGUIController/tellocontroller.cpp ../telloGUIController/videostreamreader.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../telloGUIController/mainwindow.ui $(DISTDIR)/
@@ -337,13 +332,8 @@ mocables: compiler_moc_header_make_all compiler_moc_source_make_all
 
 check: first
 
-compiler_rcc_make_all: qrc_resourcefile.cpp
+compiler_rcc_make_all:
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_resourcefile.cpp
-qrc_resourcefile.cpp: ../telloGUIController/resourcefile.qrc \
-		../telloGUIController/keyboard.png
-	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name resourcefile ../telloGUIController/resourcefile.qrc -o qrc_resourcefile.cpp
-
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_udpclient.cpp moc_tellocontroller.cpp moc_videostreamreader.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_udpclient.cpp moc_tellocontroller.cpp moc_videostreamreader.cpp
@@ -377,7 +367,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -410,9 +400,6 @@ tellocontroller.o: ../telloGUIController/tellocontroller.cpp ../telloGUIControll
 videostreamreader.o: ../telloGUIController/videostreamreader.cpp ../telloGUIController/videostreamreader.h \
 		../telloGUIController/tellodata.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o videostreamreader.o ../telloGUIController/videostreamreader.cpp
-
-qrc_resourcefile.o: qrc_resourcefile.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resourcefile.o qrc_resourcefile.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

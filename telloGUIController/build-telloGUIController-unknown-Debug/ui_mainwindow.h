@@ -40,12 +40,12 @@ public:
     QProgressBar *telloWIFI;
     QWidget *formLayoutWidget_2;
     QFormLayout *vFormLayout;
+    QLabel *telloVgxLabel;
     QProgressBar *telloVgx;
     QLabel *telloVgyLabel;
     QProgressBar *telloVgy;
     QLabel *telloVgzLabel;
     QProgressBar *telloVgz;
-    QLabel *telloVgxLabel;
     QWidget *formLayoutWidget_3;
     QFormLayout *aFormLayout;
     QLabel *telloAgyLabel;
@@ -54,10 +54,6 @@ public:
     QSlider *telloAgx;
     QSlider *telloAgy;
     QSlider *telloAgz;
-    QProgressBar *telloBaro;
-    QLabel *telloBaroLabel;
-    QProgressBar *telloH;
-    QLabel *telloTofLabel;
     QWidget *formLayoutWidget_4;
     QFormLayout *degreeFormLayout;
     QLabel *telloPitchLabel;
@@ -69,40 +65,42 @@ public:
     QLCDNumber *telloPitchV;
     QLCDNumber *telloRollV;
     QLCDNumber *telloYawV;
-    QLabel *telloHLabel;
     QTextBrowser *orderTextBrowser;
-    QProgressBar *telloTof;
     QTextBrowser *replyTextBrowser;
-    QLabel *keyboardImgLabel;
     QTextBrowser *keyboardTextBrowser;
     QLabel *orderLabel;
     QLabel *replyLabel;
     QLCDNumber *telloAgxV;
     QLCDNumber *telloAgyV;
     QLCDNumber *telloAgzV;
-    QLabel *sensitivityLabel;
-    QLCDNumber *moveSV;
     QWidget *formLayoutWidget_5;
     QFormLayout *sensitivityFormLayout;
     QLabel *moveSensitivityLabel;
-    QSlider *moveSensitivity;
+    QProgressBar *moveSensitivity;
     QLabel *rotateSensitivityLabel;
-    QSlider *rotateSensitivity;
-    QLCDNumber *rotateSV;
+    QProgressBar *rotateSensitivity;
+    QWidget *formLayoutWidget_6;
+    QFormLayout *heightFormLayout;
+    QLabel *telloHLabel;
+    QProgressBar *telloH;
+    QLabel *telloBaroLabel;
+    QProgressBar *telloBaro;
+    QLabel *telloTofLabel;
+    QProgressBar *telloTof;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1040, 813);
+        MainWindow->resize(1229, 813);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         connectTelloButton = new QPushButton(centralWidget);
         connectTelloButton->setObjectName(QStringLiteral("connectTelloButton"));
-        connectTelloButton->setGeometry(QRect(690, 10, 121, 41));
+        connectTelloButton->setGeometry(QRect(890, 10, 121, 41));
         openCameraButton = new QPushButton(centralWidget);
         openCameraButton->setObjectName(QStringLiteral("openCameraButton"));
-        openCameraButton->setGeometry(QRect(690, 70, 121, 41));
+        openCameraButton->setGeometry(QRect(890, 70, 121, 41));
         formLayoutWidget = new QWidget(centralWidget);
         formLayoutWidget->setObjectName(QStringLiteral("formLayoutWidget"));
         formLayoutWidget->setGeometry(QRect(20, 20, 301, 71));
@@ -140,12 +138,18 @@ public:
 
         formLayoutWidget_2 = new QWidget(centralWidget);
         formLayoutWidget_2->setObjectName(QStringLiteral("formLayoutWidget_2"));
-        formLayoutWidget_2->setGeometry(QRect(20, 130, 301, 121));
+        formLayoutWidget_2->setGeometry(QRect(20, 130, 301, 101));
         vFormLayout = new QFormLayout(formLayoutWidget_2);
         vFormLayout->setSpacing(6);
         vFormLayout->setContentsMargins(11, 11, 11, 11);
         vFormLayout->setObjectName(QStringLiteral("vFormLayout"));
         vFormLayout->setContentsMargins(0, 0, 0, 0);
+        telloVgxLabel = new QLabel(formLayoutWidget_2);
+        telloVgxLabel->setObjectName(QStringLiteral("telloVgxLabel"));
+        telloVgxLabel->setFont(font);
+
+        vFormLayout->setWidget(0, QFormLayout::LabelRole, telloVgxLabel);
+
         telloVgx = new QProgressBar(formLayoutWidget_2);
         telloVgx->setObjectName(QStringLiteral("telloVgx"));
         telloVgx->setStyleSheet(QStringLiteral(""));
@@ -177,15 +181,9 @@ public:
 
         vFormLayout->setWidget(2, QFormLayout::FieldRole, telloVgz);
 
-        telloVgxLabel = new QLabel(formLayoutWidget_2);
-        telloVgxLabel->setObjectName(QStringLiteral("telloVgxLabel"));
-        telloVgxLabel->setFont(font);
-
-        vFormLayout->setWidget(0, QFormLayout::LabelRole, telloVgxLabel);
-
         formLayoutWidget_3 = new QWidget(centralWidget);
         formLayoutWidget_3->setObjectName(QStringLiteral("formLayoutWidget_3"));
-        formLayoutWidget_3->setGeometry(QRect(330, 130, 291, 126));
+        formLayoutWidget_3->setGeometry(QRect(460, 280, 291, 126));
         aFormLayout = new QFormLayout(formLayoutWidget_3);
         aFormLayout->setSpacing(6);
         aFormLayout->setContentsMargins(11, 11, 11, 11);
@@ -242,32 +240,9 @@ public:
 
         aFormLayout->setWidget(2, QFormLayout::FieldRole, telloAgz);
 
-        telloBaro = new QProgressBar(centralWidget);
-        telloBaro->setObjectName(QStringLiteral("telloBaro"));
-        telloBaro->setGeometry(QRect(480, 50, 191, 21));
-        telloBaro->setMinimum(-100);
-        telloBaro->setMaximum(0);
-        telloBaro->setValue(-50);
-        telloBaro->setOrientation(Qt::Horizontal);
-        telloBaroLabel = new QLabel(centralWidget);
-        telloBaroLabel->setObjectName(QStringLiteral("telloBaroLabel"));
-        telloBaroLabel->setGeometry(QRect(350, 50, 121, 21));
-        QFont font1;
-        font1.setPointSize(12);
-        telloBaroLabel->setFont(font1);
-        telloH = new QProgressBar(centralWidget);
-        telloH->setObjectName(QStringLiteral("telloH"));
-        telloH->setGeometry(QRect(480, 20, 191, 21));
-        telloH->setMaximum(30);
-        telloH->setValue(24);
-        telloH->setOrientation(Qt::Horizontal);
-        telloTofLabel = new QLabel(centralWidget);
-        telloTofLabel->setObjectName(QStringLiteral("telloTofLabel"));
-        telloTofLabel->setGeometry(QRect(350, 80, 121, 21));
-        telloTofLabel->setFont(font1);
         formLayoutWidget_4 = new QWidget(centralWidget);
         formLayoutWidget_4->setObjectName(QStringLiteral("formLayoutWidget_4"));
-        formLayoutWidget_4->setGeometry(QRect(20, 280, 301, 149));
+        formLayoutWidget_4->setGeometry(QRect(20, 280, 301, 131));
         degreeFormLayout = new QFormLayout(formLayoutWidget_4);
         degreeFormLayout->setSpacing(6);
         degreeFormLayout->setContentsMargins(11, 11, 11, 11);
@@ -335,33 +310,18 @@ public:
         telloYawV->setObjectName(QStringLiteral("telloYawV"));
         telloYawV->setGeometry(QRect(330, 360, 101, 41));
         telloYawV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
-        telloHLabel = new QLabel(centralWidget);
-        telloHLabel->setObjectName(QStringLiteral("telloHLabel"));
-        telloHLabel->setGeometry(QRect(350, 20, 121, 21));
-        telloHLabel->setFont(font1);
         orderTextBrowser = new QTextBrowser(centralWidget);
         orderTextBrowser->setObjectName(QStringLiteral("orderTextBrowser"));
         orderTextBrowser->setGeometry(QRect(460, 440, 191, 351));
-        telloTof = new QProgressBar(centralWidget);
-        telloTof->setObjectName(QStringLiteral("telloTof"));
-        telloTof->setGeometry(QRect(480, 80, 191, 21));
-        telloTof->setMinimum(-1);
-        telloTof->setMaximum(400);
-        telloTof->setValue(24);
-        telloTof->setOrientation(Qt::Horizontal);
         replyTextBrowser = new QTextBrowser(centralWidget);
         replyTextBrowser->setObjectName(QStringLiteral("replyTextBrowser"));
         replyTextBrowser->setGeometry(QRect(660, 440, 121, 351));
-        keyboardImgLabel = new QLabel(centralWidget);
-        keyboardImgLabel->setObjectName(QStringLiteral("keyboardImgLabel"));
-        keyboardImgLabel->setGeometry(QRect(10, 630, 431, 181));
-        keyboardImgLabel->setStyleSheet(QStringLiteral("border-image: url(:/bkg/keyboard.png);"));
         keyboardTextBrowser = new QTextBrowser(centralWidget);
         keyboardTextBrowser->setObjectName(QStringLiteral("keyboardTextBrowser"));
-        keyboardTextBrowser->setGeometry(QRect(10, 430, 431, 81));
+        keyboardTextBrowser->setGeometry(QRect(10, 430, 431, 361));
         orderLabel = new QLabel(centralWidget);
         orderLabel->setObjectName(QStringLiteral("orderLabel"));
-        orderLabel->setGeometry(QRect(460, 410, 61, 27));
+        orderLabel->setGeometry(QRect(460, 410, 71, 27));
         orderLabel->setFont(font);
         replyLabel = new QLabel(centralWidget);
         replyLabel->setObjectName(QStringLiteral("replyLabel"));
@@ -369,28 +329,19 @@ public:
         replyLabel->setFont(font);
         telloAgxV = new QLCDNumber(centralWidget);
         telloAgxV->setObjectName(QStringLiteral("telloAgxV"));
-        telloAgxV->setGeometry(QRect(630, 130, 101, 41));
+        telloAgxV->setGeometry(QRect(760, 280, 101, 41));
         telloAgxV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
         telloAgyV = new QLCDNumber(centralWidget);
         telloAgyV->setObjectName(QStringLiteral("telloAgyV"));
-        telloAgyV->setGeometry(QRect(630, 170, 101, 41));
+        telloAgyV->setGeometry(QRect(760, 320, 101, 41));
         telloAgyV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
         telloAgzV = new QLCDNumber(centralWidget);
         telloAgzV->setObjectName(QStringLiteral("telloAgzV"));
-        telloAgzV->setGeometry(QRect(630, 210, 101, 41));
+        telloAgzV->setGeometry(QRect(760, 360, 101, 41));
         telloAgzV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
-        sensitivityLabel = new QLabel(centralWidget);
-        sensitivityLabel->setObjectName(QStringLiteral("sensitivityLabel"));
-        sensitivityLabel->setGeometry(QRect(450, 270, 121, 34));
-        sensitivityLabel->setFont(font);
-        moveSV = new QLCDNumber(centralWidget);
-        moveSV->setObjectName(QStringLiteral("moveSV"));
-        moveSV->setGeometry(QRect(800, 310, 101, 41));
-        moveSV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
-        moveSV->setProperty("intValue", QVariant(20));
         formLayoutWidget_5 = new QWidget(centralWidget);
         formLayoutWidget_5->setObjectName(QStringLiteral("formLayoutWidget_5"));
-        formLayoutWidget_5->setGeometry(QRect(450, 310, 341, 80));
+        formLayoutWidget_5->setGeometry(QRect(330, 130, 531, 61));
         sensitivityFormLayout = new QFormLayout(formLayoutWidget_5);
         sensitivityFormLayout->setSpacing(6);
         sensitivityFormLayout->setContentsMargins(11, 11, 11, 11);
@@ -402,14 +353,12 @@ public:
 
         sensitivityFormLayout->setWidget(0, QFormLayout::LabelRole, moveSensitivityLabel);
 
-        moveSensitivity = new QSlider(formLayoutWidget_5);
+        moveSensitivity = new QProgressBar(formLayoutWidget_5);
         moveSensitivity->setObjectName(QStringLiteral("moveSensitivity"));
-        moveSensitivity->setEnabled(false);
-        moveSensitivity->setMinimum(20);
-        moveSensitivity->setMaximum(100);
+        moveSensitivity->setMinimum(-1);
+        moveSensitivity->setMaximum(400);
+        moveSensitivity->setValue(20);
         moveSensitivity->setOrientation(Qt::Horizontal);
-        moveSensitivity->setTickPosition(QSlider::TicksAbove);
-        moveSensitivity->setTickInterval(5);
 
         sensitivityFormLayout->setWidget(0, QFormLayout::FieldRole, moveSensitivity);
 
@@ -419,22 +368,67 @@ public:
 
         sensitivityFormLayout->setWidget(1, QFormLayout::LabelRole, rotateSensitivityLabel);
 
-        rotateSensitivity = new QSlider(formLayoutWidget_5);
+        rotateSensitivity = new QProgressBar(formLayoutWidget_5);
         rotateSensitivity->setObjectName(QStringLiteral("rotateSensitivity"));
-        rotateSensitivity->setEnabled(false);
-        rotateSensitivity->setMinimum(1);
-        rotateSensitivity->setMaximum(360);
+        rotateSensitivity->setMinimum(-1);
+        rotateSensitivity->setMaximum(400);
+        rotateSensitivity->setValue(1);
         rotateSensitivity->setOrientation(Qt::Horizontal);
-        rotateSensitivity->setTickPosition(QSlider::TicksAbove);
-        rotateSensitivity->setTickInterval(20);
 
         sensitivityFormLayout->setWidget(1, QFormLayout::FieldRole, rotateSensitivity);
 
-        rotateSV = new QLCDNumber(centralWidget);
-        rotateSV->setObjectName(QStringLiteral("rotateSV"));
-        rotateSV->setGeometry(QRect(800, 350, 101, 41));
-        rotateSV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
-        rotateSV->setProperty("intValue", QVariant(1));
+        formLayoutWidget_6 = new QWidget(centralWidget);
+        formLayoutWidget_6->setObjectName(QStringLiteral("formLayoutWidget_6"));
+        formLayoutWidget_6->setGeometry(QRect(330, 20, 531, 101));
+        heightFormLayout = new QFormLayout(formLayoutWidget_6);
+        heightFormLayout->setSpacing(6);
+        heightFormLayout->setContentsMargins(11, 11, 11, 11);
+        heightFormLayout->setObjectName(QStringLiteral("heightFormLayout"));
+        heightFormLayout->setContentsMargins(0, 0, 0, 0);
+        telloHLabel = new QLabel(formLayoutWidget_6);
+        telloHLabel->setObjectName(QStringLiteral("telloHLabel"));
+        telloHLabel->setFont(font);
+
+        heightFormLayout->setWidget(0, QFormLayout::LabelRole, telloHLabel);
+
+        telloH = new QProgressBar(formLayoutWidget_6);
+        telloH->setObjectName(QStringLiteral("telloH"));
+        telloH->setMaximum(30);
+        telloH->setValue(24);
+        telloH->setOrientation(Qt::Horizontal);
+
+        heightFormLayout->setWidget(0, QFormLayout::FieldRole, telloH);
+
+        telloBaroLabel = new QLabel(formLayoutWidget_6);
+        telloBaroLabel->setObjectName(QStringLiteral("telloBaroLabel"));
+        telloBaroLabel->setFont(font);
+
+        heightFormLayout->setWidget(1, QFormLayout::LabelRole, telloBaroLabel);
+
+        telloBaro = new QProgressBar(formLayoutWidget_6);
+        telloBaro->setObjectName(QStringLiteral("telloBaro"));
+        telloBaro->setMinimum(-100);
+        telloBaro->setMaximum(0);
+        telloBaro->setValue(-50);
+        telloBaro->setOrientation(Qt::Horizontal);
+
+        heightFormLayout->setWidget(1, QFormLayout::FieldRole, telloBaro);
+
+        telloTofLabel = new QLabel(formLayoutWidget_6);
+        telloTofLabel->setObjectName(QStringLiteral("telloTofLabel"));
+        telloTofLabel->setFont(font);
+
+        heightFormLayout->setWidget(2, QFormLayout::LabelRole, telloTofLabel);
+
+        telloTof = new QProgressBar(formLayoutWidget_6);
+        telloTof->setObjectName(QStringLiteral("telloTof"));
+        telloTof->setMinimum(-1);
+        telloTof->setMaximum(400);
+        telloTof->setValue(24);
+        telloTof->setOrientation(Qt::Horizontal);
+
+        heightFormLayout->setWidget(2, QFormLayout::FieldRole, telloTof);
+
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -447,63 +441,69 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         connectTelloButton->setText(QApplication::translate("MainWindow", "connect", 0));
         openCameraButton->setText(QApplication::translate("MainWindow", "openCamera", 0));
-        telloBatLabel->setText(QApplication::translate("MainWindow", "bat", 0));
+        telloBatLabel->setText(QApplication::translate("MainWindow", "Bat", 0));
         telloWIFILabel->setText(QApplication::translate("MainWindow", "WIFI", 0));
+        telloVgxLabel->setText(QApplication::translate("MainWindow", "Vgx", 0));
         telloVgx->setFormat(QApplication::translate("MainWindow", "%v", 0));
         telloVgyLabel->setText(QApplication::translate("MainWindow", "Vgy", 0));
         telloVgy->setFormat(QApplication::translate("MainWindow", "%v", 0));
         telloVgzLabel->setText(QApplication::translate("MainWindow", "Vgz", 0));
         telloVgz->setFormat(QApplication::translate("MainWindow", "%v", 0));
-        telloVgxLabel->setText(QApplication::translate("MainWindow", "Vgx", 0));
         telloAgyLabel->setText(QApplication::translate("MainWindow", "Agy", 0));
         telloAgzLabel->setText(QApplication::translate("MainWindow", "Agz", 0));
         telloAgxLabel->setText(QApplication::translate("MainWindow", "Agx", 0));
-        telloBaro->setFormat(QApplication::translate("MainWindow", "%v", 0));
-        telloBaroLabel->setText(QApplication::translate("MainWindow", "Height(Baro)", 0));
-        telloH->setFormat(QApplication::translate("MainWindow", "%v", 0));
-        telloTofLabel->setText(QApplication::translate("MainWindow", "Height(Tof)", 0));
-        telloPitchLabel->setText(QApplication::translate("MainWindow", "pitch", 0));
-        telloRollLabel->setText(QApplication::translate("MainWindow", "roll", 0));
-        telloYawLabel->setText(QApplication::translate("MainWindow", "yaw", 0));
-        telloHLabel->setText(QApplication::translate("MainWindow", "Height(Relative)", 0));
+        telloPitchLabel->setText(QApplication::translate("MainWindow", "Pitch", 0));
+        telloRollLabel->setText(QApplication::translate("MainWindow", "Roll", 0));
+        telloYawLabel->setText(QApplication::translate("MainWindow", "Yaw", 0));
         orderTextBrowser->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", 0));
-        telloTof->setFormat(QApplication::translate("MainWindow", "%v", 0));
         replyTextBrowser->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", 0));
-        keyboardImgLabel->setText(QString());
         keyboardTextBrowser->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">F1   connect to tello and start command mode </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#ff0000;\">F2   stop tello's engine, EMERGENCY   </span>       </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">F3   open video stream                       </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">F4   o"
-                        "ff video stream                        </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">F5   takeoff                                 </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">F6   land                                    </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">W    up                                      </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">S    down                                    </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A    left                                    </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-                        "text-indent:0px;\">D    right </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Q    ccw, \342\206\272                                  </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">E    cw, \342\206\273                                             </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\342\206\221    forward                                 </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\342\206\223    back                                    </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">                        </p></body></html>", 0));
-        orderLabel->setText(QApplication::translate("MainWindow", "order", 0));
-        replyLabel->setText(QApplication::translate("MainWindow", "reply", 0));
-        sensitivityLabel->setText(QApplication::translate("MainWindow", "Sensitivity", 0));
-        moveSensitivityLabel->setText(QApplication::translate("MainWindow", "move", 0));
-        rotateSensitivityLabel->setText(QApplication::translate("MainWindow", "rotate", 0));
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">F1   connect to tello and start command mode   </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#ff0000;\">F2   stop tello's engine, EMERGENCY </span>           </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">F3   open video stream                         </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
+                        "F4   off video stream                          </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">F5   takeoff                                   </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">F6   land                                      </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">W    up                                        </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">S    down                                      </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A    left                                      </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -q"
+                        "t-block-indent:0; text-indent:0px;\">D    right                                     </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\342\206\221    forward                                   </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\342\206\223    back                                      </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Q    ccw, \342\206\272                                    </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">E    cw, \342\206\273                                     </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">1    decrease move distance                    </p>\n"
+"<p "
+                        "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">2    increase move distance                    </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">3    decrease rotate degree                    </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">4    increase rotate degree                    </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">5    decrease cruise speed                     </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">6    increase cruise speed                     </p></body></html>", 0));
+        orderLabel->setText(QApplication::translate("MainWindow", "Order", 0));
+        replyLabel->setText(QApplication::translate("MainWindow", "Reply", 0));
+        moveSensitivityLabel->setText(QApplication::translate("MainWindow", "Move Sensitivity", 0));
+        moveSensitivity->setFormat(QApplication::translate("MainWindow", "%v", 0));
+        rotateSensitivityLabel->setText(QApplication::translate("MainWindow", "Rotate Sensitivity", 0));
+        rotateSensitivity->setFormat(QApplication::translate("MainWindow", "%v", 0));
+        telloHLabel->setText(QApplication::translate("MainWindow", "Height(Relative)", 0));
+        telloH->setFormat(QApplication::translate("MainWindow", "%v", 0));
+        telloBaroLabel->setText(QApplication::translate("MainWindow", "Height(Baro)", 0));
+        telloBaro->setFormat(QApplication::translate("MainWindow", "%v", 0));
+        telloTofLabel->setText(QApplication::translate("MainWindow", "Height(Tof)", 0));
+        telloTof->setFormat(QApplication::translate("MainWindow", "%v", 0));
     } // retranslateUi
 
 };
