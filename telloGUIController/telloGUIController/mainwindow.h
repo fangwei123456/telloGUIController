@@ -30,6 +30,10 @@
  * 3    decrease rotate degree
  * 4    increase rotate degree
  * */
+
+// x = forward
+// y = right
+// z = up
 namespace Ui {
 class MainWindow;
 }
@@ -75,6 +79,10 @@ private slots:
 
     void updateMoveSensitivityInGui();
     void updateRotateSensitivityInGui();
+
+    void on_controlModeComboBox_currentIndexChanged(int index);
+
+    void on_commandLineEdit_returnPressed();
 
 private:
     Ui::MainWindow *ui;

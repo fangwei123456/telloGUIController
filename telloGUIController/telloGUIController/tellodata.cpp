@@ -7,8 +7,9 @@
 
 cv::Mat currentFrame;
 
-bool sendNextOrder;
-
+#if SEND_ORDER_UNTILL_GOT_REPLY
+bool canSendNextOrder;
+#endif
 
 
 int tello_pitch;

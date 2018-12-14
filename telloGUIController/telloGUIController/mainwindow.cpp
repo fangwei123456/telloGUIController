@@ -6,7 +6,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    sendNextOrder = true;
+#if SEND_ORDER_UNTILL_GOT_REPLY
+    canSendNextOrder = true;
+#endif
 
 
     ui->setupUi(this);
@@ -15,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->moveSensitivity->setMinimum(MIN_MOVE_DISTANCE);
     ui->rotateSensitivity->setMinimum(MIN_ROTATE_DEGREE);
     ui->rotateSensitivity->setMaximum(MAX_ROTATE_DEGREE);
-    this->grabKeyboard();
+
 
 
     connect(ui->openCameraButton,SIGNAL(released()),&mVideoStreamReader,SLOT(openStream()));
@@ -101,7 +103,9 @@ void MainWindow::updateSentOrder(const QString newOrder)
 
 void MainWindow::updateReceivedReply(const QString newReply)
 {
-    sendNextOrder = true;
+#if SEND_ORDER_UNTILL_GOT_REPLY
+    canSendNextOrder = true;
+#endif
     ui->orderLabel->setStyleSheet("color:green");
     replyCounter = replyCounter + 1;
     ui->replyTextBrowser->append("[" + QString::number(replyCounter) + "] " + newReply);
@@ -117,48 +121,69 @@ void MainWindow::on_openCameraButton_released()
 void MainWindow::keyPressEvent(QKeyEvent *ev)
 {
 
-    if(sendNextOrder==false)
+#if SEND_ORDER_UNTILL_GOT_REPLY
+    if(!canSendNextOrder)
     {
         return;
     }
+#endif
+
     int keyID = -1;
     switch (ev->key())
     {
         case Qt::Key_F1:
             updateSentOrder("command");
             emit(mTelloController.sendOrder("command"));
-            sendNextOrder = false;
+#if SEND_ORDER_UNTILL_GOT_REPLY
+            canSendNextOrder = false;
             ui->orderLabel->setStyleSheet("color:red");
+#endif
+            return;
             break;
         case Qt::Key_F2:
             updateSentOrder("emergency");
             emit(mTelloController.sendOrder("emergency"));
-            sendNextOrder = false;
+#if SEND_ORDER_UNTILL_GOT_REPLY
+            canSendNextOrder = false;
             ui->orderLabel->setStyleSheet("color:red");
+#endif
+            return;
             break;
         case Qt::Key_F3:
             updateSentOrder("streamon");
             emit(mTelloController.sendOrder("streamon"));
-            sendNextOrder = false;
+#if SEND_ORDER_UNTILL_GOT_REPLY
+            canSendNextOrder = false;
             ui->orderLabel->setStyleSheet("color:red");
+#endif
+            return;
             break;
         case Qt::Key_F4:
             updateSentOrder("streamoff");
             emit(mTelloController.sendOrder("streamoff"));
-            sendNextOrder = false;
+#if SEND_ORDER_UNTILL_GOT_REPLY
+            canSendNextOrder = false;
             ui->orderLabel->setStyleSheet("color:red");
+#endif
+            return;
             break;
         case Qt::Key_F5:
             updateSentOrder("takeoff");
             emit(mTelloController.sendOrder("takeoff"));
-            sendNextOrder = false;
+#if SEND_ORDER_UNTILL_GOT_REPLY
+            canSendNextOrder = false;
             ui->orderLabel->setStyleSheet("color:red");
+#endif
+            return;
             break;
         case Qt::Key_F6:
             updateSentOrder("land");
             emit(mTelloController.sendOrder("land"));
-            sendNextOrder = false;
+#if SEND_ORDER_UNTILL_GOT_REPLY
+            canSendNextOrder = false;
             ui->orderLabel->setStyleSheet("color:red");
+#endif
+            return;
             break;
         case Qt::Key_W:
             keyID = 0;
@@ -231,10 +256,6 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
 void MainWindow::keyReleaseEvent(QKeyEvent *ev)
 {
 
-    if(sendNextOrder==false)
-    {
-        return;
-    }
     int keyID = -1;
     switch (ev->key())
     {
@@ -276,7 +297,10 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ev)
 
 void MainWindow::sendKeyOrder()
 {
-
+#if SEND_ORDER_UNTILL_GOT_REPLY
+    if(!canSendNextOrder)
+        return;
+#endif
 
     if(keyPressed2[0] && keyPressed2[2])//W + S = NULL
     {
@@ -305,6 +329,7 @@ void MainWindow::sendKeyOrder()
         if(keyPressed2[i])
             sumOfKeyPressed++;
     }
+
     QString newOrder;
     if(sumOfKeyPressed==0)
         return;
@@ -358,6 +383,10 @@ void MainWindow::sendKeyOrder()
             newOrder = "cw ";
             newOrder.append(rotateDegreeStr);
         }
+#if SEND_ORDER_UNTILL_GOT_REPLY
+        canSendNextOrder = false;
+        ui->orderLabel->setStyleSheet("color:red");
+#endif
         updateSentOrder(newOrder);
         emit(mTelloController.sendOrder(newOrder));
 
@@ -366,25 +395,26 @@ void MainWindow::sendKeyOrder()
 
     if(sumOfKeyPressed==2)
     {
-        if(keyPressed2[0])
-            newOrder.append("up ");
-        if(keyPressed2[1])
-            newOrder.append("left ");
-        if(keyPressed2[2])
-            newOrder.append("down ");
-        if(keyPressed2[3])
-            newOrder.append("right ");
-        if(keyPressed2[4])
-            newOrder.append("forward ");
-        if(keyPressed2[5])
-            newOrder.append("down ");
+        qDebug()<<2;
 
         newOrder.append(moveDistanceStr);
+
+#if SEND_ORDER_UNTILL_GOT_REPLY
+        canSendNextOrder = false;
+        ui->orderLabel->setStyleSheet("color:red");
+#endif
         updateSentOrder(newOrder);
         emit(mTelloController.sendOrder(newOrder));
         return;
 
     }
+
+    if(sumOfKeyPressed==3)
+    {
+        qDebug()<<3;
+    }
+
+
 
 
 
@@ -409,3 +439,24 @@ void MainWindow::updateRotateSensitivityInGui()
 }
 
 
+void MainWindow::on_controlModeComboBox_currentIndexChanged(int index)
+{
+    if(index==0)
+    {
+        this->grabKeyboard();
+        ui->commandLineEdit->setEnabled(false);
+    }
+    else
+    {
+        ui->commandLineEdit->grabKeyboard();
+        ui->commandLineEdit->setEnabled(true);
+    }
+}
+
+void MainWindow::on_commandLineEdit_returnPressed()
+{
+    QString newOrder = ui->commandLineEdit->text();
+    ui->commandLineEdit->clear();
+    updateSentOrder(newOrder);
+    emit(mTelloController.sendOrder(newOrder));
+}

@@ -12,16 +12,21 @@
 #define MIN_CRUISE_SPEED 10//tello's min speed is 10cm/s
 #define MAX_CRUISE_SPEED 100//tello's max speed is 100cm/s
 
+#define UPDATE_WIFI_SNR_INTERVAL 5000000//update wifi snr every 5000ms
 
-#define SEND_ORDER_TIMER_INTERVAL 100
+#define SEND_ORDER_TIMER_INTERVAL 100//check input order from keyboard every 100ms
 
+#define SEND_ORDER_UNTILL_GOT_REPLY 0//if 0, we can send next order without receiving last order's reply
 
 
 
 //sharedData----------------------------
 
 extern cv::Mat currentFrame;
-extern bool sendNextOrder;//only when tello reply last order that we can send next order
+
+#if SEND_ORDER_UNTILL_GOT_REPLY
+extern bool canSendNextOrder;//only when tello reply last order that we can send next order
+#endif
 
 //state data will come in 10HZ
 extern int tello_pitch;

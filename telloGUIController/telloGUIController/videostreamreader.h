@@ -16,6 +16,7 @@ public:
 
 private:
     cv::VideoCapture camera;
+
     QString videoURL;
     QThread videoStreamReaderThread;
     QString className;

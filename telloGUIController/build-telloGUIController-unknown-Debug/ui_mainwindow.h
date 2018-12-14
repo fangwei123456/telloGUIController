@@ -13,10 +13,12 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
@@ -87,6 +89,8 @@ public:
     QProgressBar *telloBaro;
     QLabel *telloTofLabel;
     QProgressBar *telloTof;
+    QLineEdit *commandLineEdit;
+    QComboBox *controlModeComboBox;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -429,6 +433,17 @@ public:
 
         heightFormLayout->setWidget(2, QFormLayout::FieldRole, telloTof);
 
+        commandLineEdit = new QLineEdit(centralWidget);
+        commandLineEdit->setObjectName(QStringLiteral("commandLineEdit"));
+        commandLineEdit->setEnabled(false);
+        commandLineEdit->setGeometry(QRect(530, 200, 331, 31));
+        QFont font1;
+        font1.setPointSize(14);
+        commandLineEdit->setFont(font1);
+        controlModeComboBox = new QComboBox(centralWidget);
+        controlModeComboBox->setObjectName(QStringLiteral("controlModeComboBox"));
+        controlModeComboBox->setGeometry(QRect(330, 200, 181, 31));
+        controlModeComboBox->setFont(font1);
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -502,6 +517,12 @@ public:
         telloBaro->setFormat(QApplication::translate("MainWindow", "%v", 0));
         telloTofLabel->setText(QApplication::translate("MainWindow", "Height(Tof)", 0));
         telloTof->setFormat(QApplication::translate("MainWindow", "%v", 0));
+        commandLineEdit->setText(QApplication::translate("MainWindow", "command", 0));
+        controlModeComboBox->clear();
+        controlModeComboBox->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "keyboard control", 0)
+         << QApplication::translate("MainWindow", "input command", 0)
+        );
     } // retranslateUi
 
 };

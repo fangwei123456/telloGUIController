@@ -27,7 +27,7 @@ void udpClient::setIPandPort(const QString ip, const quint16 port)
              +QString::number(serverPort));
     connect(udpSocket,SIGNAL(readyRead()),this,SLOT(readMesg()));
     connect(wifiSnrTimer,SIGNAL(timeout()),this,SLOT(getTelloWifiSnr()));
-    wifiSnrTimer->start(2000);//send order to get tello wifi snr every 1000ms
+    wifiSnrTimer->start(UPDATE_WIFI_SNR_INTERVAL);
 }
 
 void udpClient::sendMesg(const QString mesg)
@@ -106,23 +106,18 @@ void udpClient::readMesg()
         }
         else
         {
-            if(receivedData[0]=='o' && receivedData[1]=='k')
-            {
-                emit(newTelloReplyGot("ok"));
-            }
-            else
-                if(receivedData[0]=='e' && receivedData[1]=='r')
-                {
-                    emit(newTelloReplyGot("error"));
-                }
-
 
             if(justSentWifiSnrOrder)
             {
                 sscanf(receivedData,"%d",&tello_wifiSnr);
-                justSentWifiSnrOrder = false;
                 emit(newTelloWifiSnrGot());
+                justSentWifiSnrOrder = false;
             }
+            else
+            {
+                emit(newTelloReplyGot(QString(receivedData)));
+            }
+
         }
 
     }

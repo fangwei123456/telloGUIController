@@ -757,6 +757,52 @@ p, li { white-space: pre-wrap; }
      </item>
     </layout>
    </widget>
+   <widget class="QLineEdit" name="commandLineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>200</y>
+      <width>331</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>command</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="controlModeComboBox">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>200</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>keyboard control</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>input command</string>
+     </property>
+    </item>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
