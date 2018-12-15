@@ -439,6 +439,9 @@
     </property>
    </widget>
    <widget class="QTextBrowser" name="orderTextBrowser">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -476,9 +479,9 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>430</y>
+      <y>440</y>
       <width>431</width>
-      <height>361</height>
+      <height>351</height>
      </rect>
     </property>
     <property name="html">
@@ -587,7 +590,7 @@ p, li { white-space: pre-wrap; }
       <x>330</x>
       <y>130</y>
       <width>531</width>
-      <height>62</height>
+      <height>98</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="sensitivityFormLayout">
@@ -644,6 +647,43 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="value">
         <number>1</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="format">
+        <string>%v</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="moveSpeedLabel">
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Move Speed</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QProgressBar" name="moveSpeed">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>10</number>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="value">
+        <number>10</number>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -763,8 +803,8 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>200</y>
+      <x>510</x>
+      <y>250</y>
       <width>331</width>
       <height>31</height>
      </rect>
@@ -781,8 +821,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QComboBox" name="controlModeComboBox">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>200</y>
+      <x>320</x>
+      <y>250</y>
       <width>181</width>
       <height>31</height>
      </rect>

@@ -89,7 +89,6 @@ void udpClient::readMesg()
         }
         udpSocket->readDatagram(receivedData,newDataSize);
 
-        //emit(newMesgGot(receivedData,newDataSize));
 
         if(fileWriter.isOpen())
         {
@@ -138,16 +137,6 @@ void udpClient::updateTelloState()
 
         emit(newTelloStateGot());
 
-
-
-    //printf("pitch:%d;roll:%d;yaw:%d;vgx:%d;vgy:%d;vgz:%d;templ:%d;temph:%d;tof:%d;h:%d;bat:%d;baro:%f;time:%d;agx:%f;agy:%f;agz:%f;\n",
-    //       tello_pitch,tello_roll,tello_yaw,
-    //       tello_vgx,tello_vgy,tello_vgz,
-    //       tello_templ,tello_temph,
-    //       tello_tof,tello_h,tello_bat,
-    //       tello_baro,tello_time,
-    //       tello_agx,tello_agy,tello_agz);
-    //fflush(stdout);
 }
 
 void udpClient::getTelloWifiSnr()

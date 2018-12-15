@@ -9,8 +9,8 @@
 #define MAX_MOVE_DISTANCE 100//tello's max move distance in one order is 100cm
 #define MIN_ROTATE_DEGREE 1//tello's min rotate degree in one order is 1
 #define MAX_ROTATE_DEGREE 360//tello's max rotate degree in one order is 360
-#define MIN_CRUISE_SPEED 10//tello's min speed is 10cm/s
-#define MAX_CRUISE_SPEED 100//tello's max speed is 100cm/s
+#define MIN_MOVE_SPEED 10//tello's min speed is 10cm/s
+#define MAX_MOVE_SPEED 100//tello's max speed is 100cm/s
 
 #define UPDATE_WIFI_SNR_INTERVAL 5000000//update wifi snr every 5000ms
 

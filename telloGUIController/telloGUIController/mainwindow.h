@@ -60,8 +60,8 @@ private:
     QQueue<int> checkKeyList;
     QTimer keyOrderSendTimer;
 
-    int moveDistance, rotateDegree;
-    QString moveDistanceStr, rotateDegreeStr;
+    int moveDistance, rotateDegree, moveSpeed;
+    QString moveDistanceStr, rotateDegreeStr, moveSpeedStr;
 
 private slots:
 
@@ -79,6 +79,7 @@ private slots:
 
     void updateMoveSensitivityInGui();
     void updateRotateSensitivityInGui();
+    void updateMoveSpeedInGui();
 
     void on_controlModeComboBox_currentIndexChanged(int index);
 

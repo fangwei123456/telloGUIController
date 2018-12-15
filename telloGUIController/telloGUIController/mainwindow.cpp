@@ -12,11 +12,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     ui->setupUi(this);
+    this->grabKeyboard();
     ui->orderLabel->setStyleSheet("color:green");
     ui->moveSensitivity->setMaximum(MAX_MOVE_DISTANCE);
     ui->moveSensitivity->setMinimum(MIN_MOVE_DISTANCE);
     ui->rotateSensitivity->setMinimum(MIN_ROTATE_DEGREE);
     ui->rotateSensitivity->setMaximum(MAX_ROTATE_DEGREE);
+    ui->moveSpeed->setMinimum(MIN_MOVE_SPEED);
+    ui->moveSpeed->setMaximum(MAX_MOVE_SPEED);
+
 
 
 
@@ -39,8 +43,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     moveDistance = MIN_MOVE_DISTANCE;
     rotateDegree = MIN_ROTATE_DEGREE;
+    moveSpeed = MIN_MOVE_SPEED;
     moveDistanceStr = QString::number(moveDistance);
     rotateDegreeStr = QString::number(rotateDegree);
+    moveSpeedStr = QString::number(moveSpeed);
 
 }
 
@@ -124,7 +130,8 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
 #if SEND_ORDER_UNTILL_GOT_REPLY
     if(!canSendNextOrder)
     {
-        return;
+         //ui->orderTextBrowser->append("[error]can not send this order untill got last order's reply");
+         return;
     }
 #endif
 
@@ -241,6 +248,22 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
             updateRotateSensitivityInGui();
         }
             break;
+        case Qt::Key_5:
+        if(moveSpeed>MIN_MOVE_SPEED)
+        {
+            moveSpeed--;
+            moveSpeedStr = QString::number(moveSpeed);
+            updateMoveSpeedInGui();
+        }
+            break;
+        case Qt::Key_6:
+        if(moveSpeed<MAX_MOVE_SPEED)
+        {
+            moveSpeed++;
+            moveSpeedStr = QString::number(moveSpeed);
+            updateMoveSpeedInGui();
+        }
+            break;
         default:
         break;
     }
@@ -283,6 +306,24 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ev)
         case Qt::Key_E:
             keyID = 7;
             break;
+        case Qt::Key_Y:
+        {
+#if SEND_ORDER_UNTILL_GOT_REPLY
+            if(!canSendNextOrder)
+            {
+                //ui->orderTextBrowser->append("[error]can not send this order untill got last order's reply");
+                return;
+            }
+#endif
+            QString newOrder = "speed ";
+            newOrder.append(moveSpeedStr);
+            updateSentOrder(newOrder);
+            emit(mTelloController.sendOrder(newOrder));
+            ui->moveSpeedLabel->setStyleSheet("color:green");
+            return;
+        }
+            break;
+
         default:
         break;
     }
@@ -295,12 +336,24 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ev)
     }
 }
 
+
 void MainWindow::sendKeyOrder()
 {
+    for(int i=0; i<=8; i++)
+    {
+        if(keyPressed[i])
+            break;
+        if(i==8)
+            return;
+    }
 #if SEND_ORDER_UNTILL_GOT_REPLY
     if(!canSendNextOrder)
+    {
+        //ui->orderTextBrowser->append("[error]can not send this order untill got last order's reply");
         return;
+    }
 #endif
+    QString newOrder;
 
     if(keyPressed2[0] && keyPressed2[2])//W + S = NULL
     {
@@ -323,14 +376,41 @@ void MainWindow::sendKeyOrder()
         keyPressed2[7] = false;
     }
 
+    if(keyPressed2[6])
+    {
+        newOrder = "ccw ";
+        newOrder.append(rotateDegreeStr);
+#if SEND_ORDER_UNTILL_GOT_REPLY
+        canSendNextOrder = false;
+        ui->orderLabel->setStyleSheet("color:red");
+#endif
+        updateSentOrder(newOrder);
+        emit(mTelloController.sendOrder(newOrder));
+        return;
+    }
+
+    if(keyPressed2[7])
+    {
+        newOrder = "cw ";
+        newOrder.append(rotateDegreeStr);
+#if SEND_ORDER_UNTILL_GOT_REPLY
+        canSendNextOrder = false;
+        ui->orderLabel->setStyleSheet("color:red");
+#endif
+        updateSentOrder(newOrder);
+        emit(mTelloController.sendOrder(newOrder));
+        return;
+    }
+
+
     int sumOfKeyPressed = 0;
-    for(int i=0; i<8; i++)
+    for(int i=0; i<6; i++)
     {
         if(keyPressed2[i])
             sumOfKeyPressed++;
     }
 
-    QString newOrder;
+
     if(sumOfKeyPressed==0)
         return;
 
@@ -371,18 +451,7 @@ void MainWindow::sendKeyOrder()
             newOrder = "back ";
             newOrder.append(moveDistanceStr);
         }
-        else
-        if(keyPressed2[6])
-        {
-            newOrder = "ccw ";
-            newOrder.append(rotateDegreeStr);
-        }
-        else
-        if(keyPressed2[7])
-        {
-            newOrder = "cw ";
-            newOrder.append(rotateDegreeStr);
-        }
+
 #if SEND_ORDER_UNTILL_GOT_REPLY
         canSendNextOrder = false;
         ui->orderLabel->setStyleSheet("color:red");
@@ -393,27 +462,77 @@ void MainWindow::sendKeyOrder()
         return;
     }
 
-    if(sumOfKeyPressed==2)
-    {
-        qDebug()<<2;
+    /*
+     * x+ forward   4
+     * x- back      5
+     * y+ right     3
+     * y- left      1
+     * z+ up        0
+     * z- down      2
+     * */
+    newOrder = "go ";
 
+    //x
+    if(keyPressed2[4])
+    {
         newOrder.append(moveDistanceStr);
+        newOrder.append(" ");
+    }
+    else
+        if(keyPressed2[5])
+        {
+            newOrder.append("-");
+            newOrder.append(moveDistanceStr);
+            newOrder.append(" ");
+        }
+    else
+        {
+            newOrder.append("0 ");
+        }
 
+    //y
+    if(keyPressed2[3])
+    {
+        newOrder.append(moveDistanceStr);
+        newOrder.append(" ");
+    }
+    else
+        if(keyPressed2[1])
+        {
+            newOrder.append("-");
+            newOrder.append(moveDistanceStr);
+            newOrder.append(" ");
+        }
+    else
+        {
+            newOrder.append("0 ");
+        }
+
+    //z
+    if(keyPressed2[0])
+    {
+        newOrder.append(moveDistanceStr);
+        newOrder.append(" ");
+    }
+    else
+        if(keyPressed2[2])
+        {
+            newOrder.append("-");
+            newOrder.append(moveDistanceStr);
+            newOrder.append(" ");
+        }
+    else
+        {
+            newOrder.append("0 ");
+        }
+
+    newOrder.append(moveSpeedStr);
 #if SEND_ORDER_UNTILL_GOT_REPLY
         canSendNextOrder = false;
         ui->orderLabel->setStyleSheet("color:red");
 #endif
         updateSentOrder(newOrder);
         emit(mTelloController.sendOrder(newOrder));
-        return;
-
-    }
-
-    if(sumOfKeyPressed==3)
-    {
-        qDebug()<<3;
-    }
-
 
 
 
@@ -436,8 +555,14 @@ void MainWindow::updateMoveSensitivityInGui()
 void MainWindow::updateRotateSensitivityInGui()
 {
     ui->rotateSensitivity->setValue(rotateDegree);
+
 }
 
+void MainWindow::updateMoveSpeedInGui()
+{
+    ui->moveSpeed->setValue(moveSpeed);
+    ui->moveSpeedLabel->setStyleSheet("color:red");
+}
 
 void MainWindow::on_controlModeComboBox_currentIndexChanged(int index)
 {
@@ -460,3 +585,5 @@ void MainWindow::on_commandLineEdit_returnPressed()
     updateSentOrder(newOrder);
     emit(mTelloController.sendOrder(newOrder));
 }
+
+

@@ -81,6 +81,8 @@ public:
     QProgressBar *moveSensitivity;
     QLabel *rotateSensitivityLabel;
     QProgressBar *rotateSensitivity;
+    QLabel *moveSpeedLabel;
+    QProgressBar *moveSpeed;
     QWidget *formLayoutWidget_6;
     QFormLayout *heightFormLayout;
     QLabel *telloHLabel;
@@ -316,13 +318,14 @@ public:
         telloYawV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
         orderTextBrowser = new QTextBrowser(centralWidget);
         orderTextBrowser->setObjectName(QStringLiteral("orderTextBrowser"));
+        orderTextBrowser->setEnabled(true);
         orderTextBrowser->setGeometry(QRect(460, 440, 191, 351));
         replyTextBrowser = new QTextBrowser(centralWidget);
         replyTextBrowser->setObjectName(QStringLiteral("replyTextBrowser"));
         replyTextBrowser->setGeometry(QRect(660, 440, 121, 351));
         keyboardTextBrowser = new QTextBrowser(centralWidget);
         keyboardTextBrowser->setObjectName(QStringLiteral("keyboardTextBrowser"));
-        keyboardTextBrowser->setGeometry(QRect(10, 430, 431, 361));
+        keyboardTextBrowser->setGeometry(QRect(10, 440, 431, 351));
         orderLabel = new QLabel(centralWidget);
         orderLabel->setObjectName(QStringLiteral("orderLabel"));
         orderLabel->setGeometry(QRect(460, 410, 71, 27));
@@ -345,7 +348,7 @@ public:
         telloAgzV->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
         formLayoutWidget_5 = new QWidget(centralWidget);
         formLayoutWidget_5->setObjectName(QStringLiteral("formLayoutWidget_5"));
-        formLayoutWidget_5->setGeometry(QRect(330, 130, 531, 62));
+        formLayoutWidget_5->setGeometry(QRect(330, 130, 531, 98));
         sensitivityFormLayout = new QFormLayout(formLayoutWidget_5);
         sensitivityFormLayout->setSpacing(6);
         sensitivityFormLayout->setContentsMargins(11, 11, 11, 11);
@@ -380,6 +383,23 @@ public:
         rotateSensitivity->setOrientation(Qt::Horizontal);
 
         sensitivityFormLayout->setWidget(1, QFormLayout::FieldRole, rotateSensitivity);
+
+        moveSpeedLabel = new QLabel(formLayoutWidget_5);
+        moveSpeedLabel->setObjectName(QStringLiteral("moveSpeedLabel"));
+        moveSpeedLabel->setFont(font);
+
+        sensitivityFormLayout->setWidget(2, QFormLayout::LabelRole, moveSpeedLabel);
+
+        moveSpeed = new QProgressBar(formLayoutWidget_5);
+        moveSpeed->setObjectName(QStringLiteral("moveSpeed"));
+        moveSpeed->setEnabled(true);
+        moveSpeed->setStyleSheet(QStringLiteral(""));
+        moveSpeed->setMinimum(10);
+        moveSpeed->setMaximum(100);
+        moveSpeed->setValue(10);
+        moveSpeed->setOrientation(Qt::Horizontal);
+
+        sensitivityFormLayout->setWidget(2, QFormLayout::FieldRole, moveSpeed);
 
         formLayoutWidget_6 = new QWidget(centralWidget);
         formLayoutWidget_6->setObjectName(QStringLiteral("formLayoutWidget_6"));
@@ -436,13 +456,13 @@ public:
         commandLineEdit = new QLineEdit(centralWidget);
         commandLineEdit->setObjectName(QStringLiteral("commandLineEdit"));
         commandLineEdit->setEnabled(false);
-        commandLineEdit->setGeometry(QRect(530, 200, 331, 31));
+        commandLineEdit->setGeometry(QRect(510, 250, 331, 31));
         QFont font1;
         font1.setPointSize(14);
         commandLineEdit->setFont(font1);
         controlModeComboBox = new QComboBox(centralWidget);
         controlModeComboBox->setObjectName(QStringLiteral("controlModeComboBox"));
-        controlModeComboBox->setGeometry(QRect(330, 200, 181, 31));
+        controlModeComboBox->setGeometry(QRect(320, 250, 181, 31));
         controlModeComboBox->setFont(font1);
         MainWindow->setCentralWidget(centralWidget);
 
@@ -511,6 +531,8 @@ public:
         moveSensitivity->setFormat(QApplication::translate("MainWindow", "%v", 0));
         rotateSensitivityLabel->setText(QApplication::translate("MainWindow", "Rotate Sensitivity", 0));
         rotateSensitivity->setFormat(QApplication::translate("MainWindow", "%v", 0));
+        moveSpeedLabel->setText(QApplication::translate("MainWindow", "Move Speed", 0));
+        moveSpeed->setFormat(QApplication::translate("MainWindow", "%v", 0));
         telloHLabel->setText(QApplication::translate("MainWindow", "Height(Relative)", 0));
         telloH->setFormat(QApplication::translate("MainWindow", "%v", 0));
         telloBaroLabel->setText(QApplication::translate("MainWindow", "Height(Baro)", 0));
