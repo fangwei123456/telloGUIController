@@ -5,6 +5,7 @@
 #include <QThread>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
+#include "tellodata.h"
 
 class videoStreamReader : public QObject
 {
@@ -16,6 +17,10 @@ public:
 
 private:
     cv::VideoCapture camera;
+#if SAVE_VIDEO_STREAM
+    cv::VideoWriter videoSaver;
+    QString fileName;
+#endif
 
     QString videoURL;
     QThread videoStreamReaderThread;

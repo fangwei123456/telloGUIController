@@ -18,6 +18,7 @@
 
 #define SEND_ORDER_UNTILL_GOT_REPLY 0//if 0, we can send next order without receiving last order's reply
 
+#define SAVE_VIDEO_STREAM 1//if 1, we will save video stream into .avi file
 
 
 //sharedData----------------------------
