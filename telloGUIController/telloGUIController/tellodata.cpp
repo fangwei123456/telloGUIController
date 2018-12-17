@@ -5,7 +5,13 @@
 
 //sharedData----------------------------
 
-cv::Mat currentFrame;
+cv::Mat RBF[MAT_RING_BUFFER_NUM];
+
+QAtomicInt RBFWritePos;
+
+
+
+
 
 #if SEND_ORDER_UNTILL_GOT_REPLY
 bool canSendNextOrder;
@@ -44,6 +50,7 @@ void printLog(const QString className, const QString info)
     qDebug()<<QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz")
             <<className<<info;
 }
+
 
 
 

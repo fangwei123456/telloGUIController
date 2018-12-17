@@ -17,10 +17,7 @@ public:
 
 private:
     cv::VideoCapture camera;
-#if SAVE_VIDEO_STREAM
-    cv::VideoWriter videoSaver;
-    QString fileName;
-#endif
+
 
     QString videoURL;
     QThread videoStreamReaderThread;

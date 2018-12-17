@@ -6,7 +6,7 @@ udpClient::udpClient(QObject *parent) : QObject(parent)
 {
     className = "[udpClient]";
     udpSocket = new QUdpSocket(this);
-    receivedDataSize = 1;
+    receivedDataSize = 1024;
     receivedData = new char[receivedDataSize];
     wifiSnrTimer = new QTimer(this);
     justSentWifiSnrOrder = false;

@@ -7,7 +7,7 @@
 #include <QKeyEvent>
 #include <QQueue>
 #include <QTimer>
-
+#include "videostreamsaver.h"
 /*
  * key  function
  * same as fly a plane in GTA
@@ -29,6 +29,9 @@
  * 2    increase move distance
  * 3    decrease rotate degree
  * 4    increase rotate degree
+ * 5    decrease move speed
+ * 6    increase move speed
+ * Y    set speed
  * */
 
 // x = forward
@@ -48,6 +51,9 @@ public:
 
     telloController mTelloController;
     videoStreamReader mVideoStreamReader;
+#if SAVE_VIDEO_STREAM
+    videoStreamSaver mVideoStreamSaver;
+#endif
 
 private:
     quint64 orderCounter;

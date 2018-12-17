@@ -4,6 +4,7 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <QMutex>
+#include <QAtomicInt>
 
 #define MIN_MOVE_DISTANCE 20//tello's min move distance in one order is 20cm
 #define MAX_MOVE_DISTANCE 100//tello's max move distance in one order is 100cm
@@ -16,14 +17,17 @@
 
 #define SEND_ORDER_TIMER_INTERVAL 100//check input order from keyboard every 100ms
 
-#define SEND_ORDER_UNTILL_GOT_REPLY 0//if 0, we can send next order without receiving last order's reply
+#define SEND_ORDER_UNTILL_GOT_REPLY 1//if 0, we can send next order without receiving last order's reply
 
 #define SAVE_VIDEO_STREAM 1//if 1, we will save video stream into .avi file
 
 
+#define MAT_RING_BUFFER_NUM 8
 //sharedData----------------------------
 
-extern cv::Mat currentFrame;
+extern cv::Mat RBF[MAT_RING_BUFFER_NUM];
+
+extern QAtomicInt RBFWritePos;
 
 #if SEND_ORDER_UNTILL_GOT_REPLY
 extern bool canSendNextOrder;//only when tello reply last order that we can send next order

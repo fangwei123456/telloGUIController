@@ -53,20 +53,24 @@ SOURCES       = ../telloGUIController/main.cpp \
 		../telloGUIController/tellodata.cpp \
 		../telloGUIController/udpclient.cpp \
 		../telloGUIController/tellocontroller.cpp \
-		../telloGUIController/videostreamreader.cpp moc_mainwindow.cpp \
+		../telloGUIController/videostreamreader.cpp \
+		../telloGUIController/videostreamsaver.cpp moc_mainwindow.cpp \
 		moc_udpclient.cpp \
 		moc_tellocontroller.cpp \
-		moc_videostreamreader.cpp
+		moc_videostreamreader.cpp \
+		moc_videostreamsaver.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		tellodata.o \
 		udpclient.o \
 		tellocontroller.o \
 		videostreamreader.o \
+		videostreamsaver.o \
 		moc_mainwindow.o \
 		moc_udpclient.o \
 		moc_tellocontroller.o \
-		moc_videostreamreader.o
+		moc_videostreamreader.o \
+		moc_videostreamsaver.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -130,12 +134,14 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../telloGUIController/tellodata.h \
 		../telloGUIController/udpclient.h \
 		../telloGUIController/tellocontroller.h \
-		../telloGUIController/videostreamreader.h ../telloGUIController/main.cpp \
+		../telloGUIController/videostreamreader.h \
+		../telloGUIController/videostreamsaver.h ../telloGUIController/main.cpp \
 		../telloGUIController/mainwindow.cpp \
 		../telloGUIController/tellodata.cpp \
 		../telloGUIController/udpclient.cpp \
 		../telloGUIController/tellocontroller.cpp \
-		../telloGUIController/videostreamreader.cpp
+		../telloGUIController/videostreamreader.cpp \
+		../telloGUIController/videostreamsaver.cpp
 QMAKE_TARGET  = telloGUIController
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = telloGUIController
@@ -309,8 +315,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../telloGUIController/mainwindow.h ../telloGUIController/tellodata.h ../telloGUIController/udpclient.h ../telloGUIController/tellocontroller.h ../telloGUIController/videostreamreader.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../telloGUIController/main.cpp ../telloGUIController/mainwindow.cpp ../telloGUIController/tellodata.cpp ../telloGUIController/udpclient.cpp ../telloGUIController/tellocontroller.cpp ../telloGUIController/videostreamreader.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../telloGUIController/mainwindow.h ../telloGUIController/tellodata.h ../telloGUIController/udpclient.h ../telloGUIController/tellocontroller.h ../telloGUIController/videostreamreader.h ../telloGUIController/videostreamsaver.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../telloGUIController/main.cpp ../telloGUIController/mainwindow.cpp ../telloGUIController/tellodata.cpp ../telloGUIController/udpclient.cpp ../telloGUIController/tellocontroller.cpp ../telloGUIController/videostreamreader.cpp ../telloGUIController/videostreamsaver.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../telloGUIController/mainwindow.ui $(DISTDIR)/
 
 
@@ -334,12 +340,13 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_udpclient.cpp moc_tellocontroller.cpp moc_videostreamreader.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_udpclient.cpp moc_tellocontroller.cpp moc_videostreamreader.cpp moc_videostreamsaver.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_udpclient.cpp moc_tellocontroller.cpp moc_videostreamreader.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_udpclient.cpp moc_tellocontroller.cpp moc_videostreamreader.cpp moc_videostreamsaver.cpp
 moc_mainwindow.cpp: ../telloGUIController/tellocontroller.h \
 		../telloGUIController/udpclient.h \
 		../telloGUIController/videostreamreader.h \
+		../telloGUIController/tellodata.h \
 		../telloGUIController/mainwindow.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/nvidia/qtproject/telloGUIController/telloGUIController/telloGUIController -I/usr/local/include/opencv -I/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../telloGUIController/mainwindow.h -o moc_mainwindow.cpp
 
@@ -350,8 +357,12 @@ moc_tellocontroller.cpp: ../telloGUIController/udpclient.h \
 		../telloGUIController/tellocontroller.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/nvidia/qtproject/telloGUIController/telloGUIController/telloGUIController -I/usr/local/include/opencv -I/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../telloGUIController/tellocontroller.h -o moc_tellocontroller.cpp
 
-moc_videostreamreader.cpp: ../telloGUIController/videostreamreader.h
+moc_videostreamreader.cpp: ../telloGUIController/tellodata.h \
+		../telloGUIController/videostreamreader.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/nvidia/qtproject/telloGUIController/telloGUIController/telloGUIController -I/usr/local/include/opencv -I/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../telloGUIController/videostreamreader.h -o moc_videostreamreader.cpp
+
+moc_videostreamsaver.cpp: ../telloGUIController/videostreamsaver.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/nvidia/qtproject/telloGUIController/telloGUIController/telloGUIController -I/usr/local/include/opencv -I/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../telloGUIController/videostreamsaver.h -o moc_videostreamsaver.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -374,15 +385,16 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 main.o: ../telloGUIController/main.cpp ../telloGUIController/mainwindow.h \
 		../telloGUIController/tellocontroller.h \
 		../telloGUIController/udpclient.h \
-		../telloGUIController/videostreamreader.h
+		../telloGUIController/videostreamreader.h \
+		../telloGUIController/tellodata.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../telloGUIController/main.cpp
 
 mainwindow.o: ../telloGUIController/mainwindow.cpp ../telloGUIController/mainwindow.h \
 		../telloGUIController/tellocontroller.h \
 		../telloGUIController/udpclient.h \
 		../telloGUIController/videostreamreader.h \
-		ui_mainwindow.h \
-		../telloGUIController/tellodata.h
+		../telloGUIController/tellodata.h \
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../telloGUIController/mainwindow.cpp
 
 tellodata.o: ../telloGUIController/tellodata.cpp ../telloGUIController/tellodata.h
@@ -401,6 +413,10 @@ videostreamreader.o: ../telloGUIController/videostreamreader.cpp ../telloGUICont
 		../telloGUIController/tellodata.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o videostreamreader.o ../telloGUIController/videostreamreader.cpp
 
+videostreamsaver.o: ../telloGUIController/videostreamsaver.cpp ../telloGUIController/videostreamsaver.h \
+		../telloGUIController/tellodata.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o videostreamsaver.o ../telloGUIController/videostreamsaver.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
@@ -412,6 +428,9 @@ moc_tellocontroller.o: moc_tellocontroller.cpp
 
 moc_videostreamreader.o: moc_videostreamreader.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_videostreamreader.o moc_videostreamreader.cpp
+
+moc_videostreamsaver.o: moc_videostreamsaver.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_videostreamsaver.o moc_videostreamsaver.cpp
 
 ####### Install
 

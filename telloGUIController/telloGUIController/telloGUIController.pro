@@ -18,13 +18,15 @@ SOURCES += main.cpp\
     tellodata.cpp \
     udpclient.cpp \
     tellocontroller.cpp \
-    videostreamreader.cpp
+    videostreamreader.cpp \
+    videostreamsaver.cpp
 
 HEADERS  += mainwindow.h \
     tellodata.h \
     udpclient.h \
     tellocontroller.h \
-    videostreamreader.h
+    videostreamreader.h \
+    videostreamsaver.h
 
 FORMS    += mainwindow.ui
 

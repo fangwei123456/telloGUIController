@@ -25,6 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     connect(ui->openCameraButton,SIGNAL(released()),&mVideoStreamReader,SLOT(openStream()));
+#if SAVE_VIDEO_STREAM
+    mVideoStreamSaver.init();
+    connect(ui->openCameraButton,SIGNAL(released()),&mVideoStreamSaver,SLOT(startToSave()));
+#endif
     connect(&mTelloController.stateReader,SIGNAL(newTelloStateGot()),this,SLOT(updateTelloStateInGui()));
     connect(&mTelloController.orderSender,SIGNAL(newTelloWifiSnrGot()),this,SLOT(updateTelloWifiSnrInGui()));
     connect(&mTelloController.orderSender,SIGNAL(newTelloReplyGot(QString)),this,SLOT(updateReceivedReply(QString)));
