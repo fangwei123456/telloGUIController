@@ -23,6 +23,8 @@ key mapping(same as fly a plane in GTA):<br>
  * 5    decrease move speed
  * 6    increase move speed
  * Y    set speed
+ 
+ Change control mode from "keyboard control" to "input command", and you can also input order string to control tello.<br>
 
 ![1](https://github.com/fangwei123456/telloGUIController/blob/master/0.JPG)
 
