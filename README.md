@@ -41,7 +41,7 @@ If not, just do this:<br>
 `qmake`<br>
 `make -j8`<br>
 
-You can use qt-creator to open .pro and compile this prpoject.<br> 
+You can also use qt-creator to open .pro and compile this prpoject.<br> 
 If you have not installed qt-creator, just do this:<br>
 `sudo apt-get install qtcreator`<br>
 
