@@ -35,13 +35,13 @@ First, make sure that you have installed FFmpeg, and built openCV(version>=3.0) 
 
 Second, make sure that you have installed qt5 and qmake.<br>
 If not, just do this:<br>
-`sudo apt-get install qt5-default<br>
-git colne git@github.com:fangwei123456/telloGUIController.git
-cd telloGUIController/telloGUIController/telloGUIController
-qmake
-make -j8`
+`sudo apt-get install qt5-default`
+`git colne git@github.com:fangwei123456/telloGUIController.git`
+`cd telloGUIController/telloGUIController/telloGUIController`
+`qmake`
+`make -j8`
 
 You can use qt-creator to open .pro and compile this prpoject.<br> 
 If you have not installed qt-creator, just do this:<br>
-`sudo apt-get install qtcreator`<br>
+`sudo apt-get install qtcreator`
 
