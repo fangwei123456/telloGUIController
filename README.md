@@ -1,9 +1,7 @@
 # telloGUIController
 A tello GUI controller based on Qt5.<br>
 This project will be finished before 2019.7.1.<br>
-control key<br>
- * key  function
- * same as fly a plane in GTA
+key mapping(same as fly a plane in GTA):<br>
  * F1   connect to tello and start command mode
  * F2   stop tello's engine, EMERGENCY
  * F3   open video stream
