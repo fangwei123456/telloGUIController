@@ -36,6 +36,8 @@ First, make sure that you have installed FFmpeg, and built openCV(version>=3.0) 
 Second, make sure that you have installed qt5 and qmake.<br>
 If not, just do this:<br>
 `sudo apt-get install qt5-default`<br>
+
+Then you can download this project and compile it.<br>
 `git colne git@github.com:fangwei123456/telloGUIController.git`<br>
 `cd telloGUIController/telloGUIController/telloGUIController`<br>
 `qmake`<br>
