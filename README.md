@@ -2,7 +2,7 @@
 A tello GUI controller based on Qt5.
 <br>This project will be finished before 2019.7.1<br>
 
-!(https://github.com/fangwei123456/telloGUIController/blob/master/0.JPG)
+![1](https://github.com/fangwei123456/telloGUIController/blob/master/0.JPG)
 
 Compile:<br>
 
